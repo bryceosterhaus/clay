@@ -3,7 +3,65 @@
   "root" : {
     "parentid" : null,
     "children" : [
+      {
+        "radiusBottomLeft" : 0,
+        "rotation" : 0,
+        "fillImagePixelHeight" : null,
+        "id" : "oKq8jStk9",
+        "fillImage" : null,
+        "fillColor" : "rgba(255,255,255,1)",
+        "__class" : "CodeComponentNode",
+        "fillImageResize" : "fill",
+        "opacity" : 1,
+        "clip" : true,
+        "locked" : false,
+        "left" : 294,
+        "widthType" : 0,
+        "codeComponentIdentifier" : ".\/Badge.tsx_Badge",
+        "fillGradient" : {
+          "end" : "rgba(0,0,0,0)",
+          "alpha" : 1,
+          "angle" : 0,
+          "__class" : "LinearGradient",
+          "start" : "black"
+        },
+        "radius" : 0,
+        "aspectRatio" : null,
+        "centerAnchorX" : 0,
+        "heightType" : 0,
+        "fillType" : "color",
+        "radiusIsRelative" : false,
+        "radiusBottomRight" : 0,
+        "children" : [
 
+        ],
+        "fillEnabled" : false,
+        "parentid" : "ZTNxfVTax",
+        "originalid" : null,
+        "codeComponentProps" : {
+          "label" : "5",
+          "type" : "primary"
+        },
+        "codeOverrideEnabled" : false,
+        "exportOptions" : [
+
+        ],
+        "name" : null,
+        "height" : 200,
+        "radiusTopRight" : 0,
+        "top" : 58,
+        "intrinsicWidth" : null,
+        "fillImagePixelWidth" : null,
+        "constraintsLocked" : false,
+        "visible" : true,
+        "right" : null,
+        "centerAnchorY" : 0,
+        "radiusPerCorner" : false,
+        "intrinsicHeight" : null,
+        "radiusTopLeft" : 0,
+        "bottom" : null,
+        "width" : 200
+      }
     ],
     "id" : "ZTNxfVTax",
     "visible" : false,
