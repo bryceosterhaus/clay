@@ -11,10 +11,14 @@ import {ControlType, PropertyControls,} from 'framer';
 type Props = {message: string; title: string; type: string};
 
 export class Alert extends React.Component<Props> {
+	state = {
+		active: false,
+	};
 	render() {
 		return (
 			<ClayAlert
-				message={this.props.message}
+				message={this.state.active ? this.props.message : 'nope'}
+				onClick={() => this.setState({active: true,})}
 				title={this.props.title}
 				type={this.props.type}
 			/>

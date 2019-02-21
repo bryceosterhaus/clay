@@ -15,7 +15,7 @@
         "opacity" : 1,
         "clip" : true,
         "locked" : false,
-        "left" : 792,
+        "left" : 483,
         "widthType" : 0,
         "codeComponentIdentifier" : ".\/Badge.tsx_Badge",
         "fillGradient" : {
@@ -39,17 +39,17 @@
         "parentid" : "ZTNxfVTax",
         "originalid" : null,
         "codeComponentProps" : {
-          "label" : "5",
-          "type" : "primary"
+          "label" : "1000",
+          "type" : "warning"
         },
         "codeOverrideEnabled" : false,
         "exportOptions" : [
 
         ],
         "name" : null,
-        "height" : 200,
+        "height" : 81,
         "radiusTopRight" : 0,
-        "top" : 418,
+        "top" : 129,
         "intrinsicWidth" : null,
         "fillImagePixelWidth" : null,
         "constraintsLocked" : false,
@@ -60,7 +60,7 @@
         "intrinsicHeight" : null,
         "radiusTopLeft" : 0,
         "bottom" : null,
-        "width" : 200
+        "width" : 108
       },
       {
         "radiusBottomLeft" : 0,
@@ -74,7 +74,7 @@
         "opacity" : 1,
         "clip" : true,
         "locked" : false,
-        "left" : 846,
+        "left" : 483,
         "widthType" : 0,
         "codeComponentIdentifier" : ".\/Alert.tsx_Alert",
         "fillGradient" : {
@@ -107,9 +107,9 @@
 
         ],
         "name" : null,
-        "height" : 200,
+        "height" : 75,
         "radiusTopRight" : 0,
-        "top" : 154,
+        "top" : 31,
         "intrinsicWidth" : null,
         "fillImagePixelWidth" : null,
         "constraintsLocked" : false,
@@ -120,7 +120,7 @@
         "intrinsicHeight" : null,
         "radiusTopLeft" : 0,
         "bottom" : null,
-        "width" : 200
+        "width" : 429
       }
     ],
     "id" : "ZTNxfVTax",
