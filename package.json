@@ -1,7 +1,8 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "lerna run build && lerna run build:types",
+		"build": "lerna run build",
+		"build:types": "lerna run build:types",
 		"compile": "lerna run compile",
 		"checkFormat": "npm run prettier -- --list-different",
 		"coveralls": "node node_modules/coveralls/bin/coveralls.js < coverage/lcov.info",
