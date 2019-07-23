@@ -5,6 +5,7 @@
  */
 
 import ClayButton from '@clayui/button';
+import ClayForm from '@clayui/form';
 import ClayIcon from '@clayui/icon';
 import React from 'react';
 
@@ -33,24 +34,24 @@ const ClayDropDownSearch: React.FunctionComponent<IProps> = ({
 	return (
 		<form className={className}>
 			<div className="dropdown-section">
-				<div className="input-group input-group-sm">
-					<div className="input-group-item">
-						<input
+				<ClayForm.Input.Group small>
+					<ClayForm.Input.GroupItem>
+						<ClayForm.Input
 							{...otherProps}
-							className="form-control input-group-inset input-group-inset-after"
+							insetAfter
 							type="text"
 						/>
 
-						<span className="input-group-inset-item input-group-inset-item-after">
+						<ClayForm.Input.GroupInsetItem after tag="span">
 							<ClayButton displayType="unstyled" type="button">
 								<ClayIcon
 									spritemap={spritemap}
 									symbol="search"
 								/>
 							</ClayButton>
-						</span>
-					</div>
-				</div>
+						</ClayForm.Input.GroupInsetItem>
+					</ClayForm.Input.GroupItem>
+				</ClayForm.Input.Group>
 			</div>
 		</form>
 	);

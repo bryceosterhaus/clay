@@ -3,7 +3,10 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-import ClayForm, {ClayInputWithAutocomplete} from '../src';
+import ClayForm, {
+	ClayInputWithAutocomplete,
+	ClayInputWithMultiSelect,
+} from '../src';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -18,7 +21,7 @@ const ClayMultiSelectWithState = (props: any) => {
 
 	return (
 		<div className="sheet">
-			<ClayForm.MultiSelect
+			<ClayInputWithMultiSelect
 				{...props}
 				inputValue={value}
 				items={items}
@@ -38,7 +41,7 @@ const ClayMultiSelectWithAutocomplete = () => {
 
 	return (
 		<div className="sheet">
-			<ClayForm.MultiSelect
+			<ClayInputWithMultiSelect
 				inputValue={value}
 				items={selectedItems}
 				onInputChange={setValue}

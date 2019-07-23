@@ -16,6 +16,7 @@ import React, {
 import {useCurrentTime, useWeeks} from './Hooks';
 
 import Button from '@clayui/button';
+import ClayForm from '@clayui/form';
 import DateNavigation from './DateNavigation';
 import DayNumber from './DayNumber';
 import DaysTable from './DaysTable';
@@ -299,8 +300,8 @@ const ClayDatePicker: FunctionComponent<IProps> = ({
 
 	return (
 		<div className="date-picker">
-			<div className="input-group" id={id} ref={triggerElementRef}>
-				<div className="input-group-item">
+			<ClayForm.Input.Group id={id} ref={triggerElementRef}>
+				<ClayForm.Input.GroupItem>
 					<InputDate
 						ariaLabel={ariaLabels.input}
 						currentTime={currentTime}
@@ -314,7 +315,7 @@ const ClayDatePicker: FunctionComponent<IProps> = ({
 						value={value}
 					/>
 					{!useNative && (
-						<div className="input-group-inset-item input-group-inset-item-after">
+						<ClayForm.Input.GroupInsetItem after>
 							<Button
 								className="date-picker-dropdown-toggle"
 								data-testid="date-button"
@@ -323,10 +324,10 @@ const ClayDatePicker: FunctionComponent<IProps> = ({
 							>
 								<Icon spritemap={spritemap} symbol="calendar" />
 							</Button>
-						</div>
+						</ClayForm.Input.GroupInsetItem>
 					)}
-				</div>
-			</div>
+				</ClayForm.Input.GroupItem>
+			</ClayForm.Input.Group>
 
 			{!useNative && (
 				<DropDown.Menu

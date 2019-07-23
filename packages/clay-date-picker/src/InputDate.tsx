@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-import classnames from 'classnames';
+import ClayForm from '@clayui/form';
 import moment from 'moment';
 import React, {ChangeEventHandler, FunctionComponent, useMemo} from 'react';
 
@@ -52,16 +52,12 @@ const ClayDatePickerInputDate: FunctionComponent<IProps> = ({
 		currentTime,
 	]);
 
-	const className = classnames('form-control input-group-inset', {
-		'input-group-inset-after': !useNative,
-	});
-
 	return (
 		<React.Fragment>
 			<input name={inputName} type="hidden" value={memoizedValue} />
-			<input
+			<ClayForm.Input
 				aria-label={ariaLabel}
-				className={className}
+				insetAfter
 				onChange={onChange}
 				placeholder={placeholder}
 				type={useNative ? 'date' : 'text'}
