@@ -2,7 +2,7 @@
 
 exports[`ClayInputWithMultiSelect renders 1`] = `
 <div
-  className="form-group form-group"
+  className="form-group"
 >
   <div
     className="input-group"
@@ -31,7 +31,7 @@ exports[`ClayInputWithMultiSelect renders 1`] = `
 
 exports[`ClayInputWithMultiSelect renders as not valid 1`] = `
 <div
-  className="form-group form-group has-error"
+  className="form-group has-error"
 >
   <div
     className="input-group"
@@ -168,7 +168,7 @@ exports[`ClayInputWithMultiSelect renders as not valid 1`] = `
 
 exports[`ClayInputWithMultiSelect renders with items 1`] = `
 <div
-  className="form-group form-group"
+  className="form-group"
 >
   <div
     className="input-group"
