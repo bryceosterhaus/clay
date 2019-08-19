@@ -5,6 +5,7 @@
  */
 import '@clayui/css/lib/css/atlas.css';
 import ClayButton from '@clayui/button';
+import ClayDatePicker from '@clayui/date-picker';
 import ClayDropDown, {Align, ClayDropDownWithBasicItems} from '../src';
 import React, {useState} from 'react';
 import {ClayCheckbox, ClayRadio} from '@clayui/form';
@@ -12,6 +13,19 @@ import {select} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
 
 const spritemap = require('@clayui/css/lib/images/icons/icons.svg');
+
+const ClayDatePickerWithState = (props: {[key: string]: any}) => {
+	const [value, setValue] = useState<string | Date>('');
+
+	return (
+		<ClayDatePicker
+			{...props}
+			onValueChange={setValue}
+			spritemap={spritemap}
+			value={value as string}
+		/>
+	);
+};
 
 const DropDownWithState: React.FunctionComponent<any> = ({
 	children,
@@ -45,153 +59,21 @@ const DropDownWithState: React.FunctionComponent<any> = ({
 	);
 };
 
-storiesOf('ClayDropDown', module)
-	.add('default', () => (
-		<DropDownWithState>
-			<ClayDropDown.ItemList>
-				{[
-					{href: '#one', label: 'one'},
-					{href: '#two', label: 'two'},
-					{href: '#three', label: 'three'},
-				].map((item, i) => (
-					<ClayDropDown.Item href={item.href} key={i}>
-						{item.label}
-					</ClayDropDown.Item>
-				))}
-			</ClayDropDown.ItemList>
-		</DropDownWithState>
-	))
-	.add('groups', () => (
-		<DropDownWithState>
-			<ClayDropDown.ItemList>
-				<ClayDropDown.Group header="Group #1">
-					{[
-						{href: '#one', label: 'one'},
-						{href: '#two', label: 'two'},
-						{href: '#three', label: 'three'},
-					].map((item, i) => (
-						<ClayDropDown.Item href={item.href} key={i}>
-							{item.label}
-						</ClayDropDown.Item>
-					))}
-				</ClayDropDown.Group>
-
-				<ClayDropDown.Group header="Group #2">
-					{[
-						{href: '#one', label: 'one'},
-						{href: '#two', label: 'two'},
-						{href: '#three', label: 'three'},
-					].map((item, i) => (
-						<ClayDropDown.Item href={item.href} key={i}>
-							{item.label}
-						</ClayDropDown.Item>
-					))}
-				</ClayDropDown.Group>
-			</ClayDropDown.ItemList>
-		</DropDownWithState>
-	))
-	.add('checkbox', () => (
-		<DropDownWithState>
-			<ClayDropDown.ItemList>
-				<ClayDropDown.Item>
-					<ClayCheckbox
-						checked
-						label="I'm a checkbox!"
-						onChange={() => {}}
-					/>
-				</ClayDropDown.Item>
-			</ClayDropDown.ItemList>
-		</DropDownWithState>
-	))
-	.add('radio', () => (
-		<DropDownWithState>
-			<ClayDropDown.ItemList>
-				<ClayDropDown.Group header="Order">
-					<ClayDropDown.Item>
-						<ClayRadio checked label="Ascending" value="asc" />
-					</ClayDropDown.Item>
-					<ClayDropDown.Item>
-						<ClayRadio label="Descending" value="desc" />
-					</ClayDropDown.Item>
-				</ClayDropDown.Group>
-			</ClayDropDown.ItemList>
-		</DropDownWithState>
-	))
-	.add('caption and help', () => (
-		<DropDownWithState>
-			<ClayDropDown.Help>{'Can I help you?'}</ClayDropDown.Help>
-
-			<ClayDropDown.ItemList>
-				{[
-					{href: '#one', label: 'one'},
-					{href: '#two', label: 'two'},
-					{href: '#three', label: 'three'},
-				].map((item, i) => (
-					<ClayDropDown.Item href={item.href} key={i}>
-						{item.label}
-					</ClayDropDown.Item>
-				))}
-			</ClayDropDown.ItemList>
-
-			<ClayDropDown.Caption>{'... or maybe not.'}</ClayDropDown.Caption>
-		</DropDownWithState>
-	))
-	.add('items with icons', () => (
-		<DropDownWithState hasLeftSymbols hasRightSymbols>
-			<ClayDropDown.ItemList>
-				{[
-					{label: 'Left', left: 'trash'},
-					{label: 'Right', right: 'check'},
-					{label: 'Both', left: 'trash', right: 'check'},
-				].map((item, i) => (
-					<ClayDropDown.Item
-						key={i}
+storiesOf('ClayDropDown', module).add('Date Picker in Dropdown', () => (
+	<DropDownWithState>
+		<ClayDropDown.ItemList>
+			<ClayDropDown.Item>
+				<div className="dropdown-section">
+					<ClayDatePickerWithState
+						placeholder="YYYY-MM-DD"
 						spritemap={spritemap}
-						symbolLeft={item.left}
-						symbolRight={item.right}
-					>
-						{item.label}
-					</ClayDropDown.Item>
-				))}
-			</ClayDropDown.ItemList>
-		</DropDownWithState>
-	))
-	.add('ClayDropDownWithBasicItems', () => (
-		<ClayDropDownWithBasicItems
-			items={[
-				{
-					label: 'clickable',
-					onClick: () => {
-						alert('you clicked!');
-					},
-				},
-				{type: 'divider'},
-				{
-					href: '#',
-					label: 'linkable',
-				},
-			]}
-			trigger={<ClayButton>{'Click Me'}</ClayButton>}
-		/>
-	))
-	.add('ClayDropDownWithBasicItems w/ icons', () => (
-		<ClayDropDownWithBasicItems
-			items={[
-				{
-					label: 'clickable',
-					onClick: () => {
-						alert('you clicked!');
-					},
-					symbolLeft: 'trash',
-				},
-				{type: 'divider'},
-				{
-					href: '#',
-					label: 'linkable',
-					symbolRight: 'pencil',
-				},
-			]}
-			spritemap={spritemap}
-			trigger={<ClayButton>{'Click Me'}</ClayButton>}
-		/>
-	));
+						years={{
+							end: 2024,
+							start: 1997,
+						}}
+					/>
+				</div>
+			</ClayDropDown.Item>
+		</ClayDropDown.ItemList>
+	</DropDownWithState>
+));
