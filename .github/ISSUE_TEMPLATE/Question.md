@@ -1,7 +1,10 @@
 ---
-name: 🤔 Question
+name: "\U0001F914 Question"
 about: Issues for asking questions about Clay
+title: ''
 labels: question
+assignees: ''
+
 ---
 
 <!--

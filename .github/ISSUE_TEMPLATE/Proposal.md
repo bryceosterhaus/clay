@@ -1,7 +1,10 @@
 ---
-name: 💍 Proposal
+name: "\U0001F48D Proposal"
 about: Issues for proposing a change to Clay
+title: ''
 labels: rfc
+assignees: ''
+
 ---
 
 <!--
