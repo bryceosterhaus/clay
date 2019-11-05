@@ -68,8 +68,7 @@ const ClayModal: FunctionComponent<IProps> & {
 	// Defines a default Modal size when size is not set.
 	const maxWidth = size ? {} : {maxWidth: '600px'};
 
-	const [show, content] =
-		observer && observer.mutation ? observer.mutation : [false, false];
+	const [show, content] = observer?.mutation || [false, false];
 
 	return (
 		<ClayPortal subPortalRef={modalBodyElementRef}>

@@ -39,8 +39,7 @@ const ClayAutocompleteDropDown: React.FunctionComponent<IProps> = ({
 		alignElementRef = containerElementRef;
 	}
 
-	const alignElementWidth =
-		alignElementRef.current && alignElementRef.current.clientWidth;
+	const alignElementWidth = alignElementRef?.current?.clientWidth;
 
 	return (
 		<ClayDropDown.Menu

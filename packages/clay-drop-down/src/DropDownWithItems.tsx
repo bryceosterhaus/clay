@@ -215,7 +215,7 @@ const RadioGroup: React.FunctionComponent<IItem & IInternalItem> = ({
 	};
 
 	warning(
-		items && items.filter(item => item.type !== 'radio').length === 0,
+		items?.filter(item => item.type !== 'radio').length === 0,
 		'ClayDropDownWithItems -> Items of type `radiogroup` should be used `radio` if you need to use others, it is recommended to use type `group`.'
 	);
 

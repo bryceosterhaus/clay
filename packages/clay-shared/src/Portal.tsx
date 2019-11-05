@@ -32,15 +32,9 @@ export const ClayPortal: React.FunctionComponent<
 	);
 
 	useEffect(() => {
-		const closestParent =
-			parentPortalRef && parentPortalRef.current
-				? parentPortalRef.current
-				: document.body;
+		const closestParent = parentPortalRef?.current ||document.body;
 
-		const elToMountTo =
-			containerRef && containerRef.current
-				? containerRef.current
-				: closestParent;
+		const elToMountTo = containerRef?.current || closestParent;
 
 		if (elToMountTo && portalRef.current) {
 			elToMountTo.appendChild(portalRef.current);
