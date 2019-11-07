@@ -57,7 +57,7 @@ export default () => {
 			},
 		},
 		{
-			type: 'divider' as const,
+			type: 'divider',
 		},
 		{
 			href: '#',
