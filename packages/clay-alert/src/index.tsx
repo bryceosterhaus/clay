@@ -130,6 +130,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 				'alert-fluid': variant === 'stripe',
 				[`alert-${displayType}`]: displayType,
 			})}
+			onClick={() => alert('hi')}
 			onMouseOut={startAutoCloseTimer}
 			onMouseOver={pauseAutoCloseTimer}
 			role="alert"
