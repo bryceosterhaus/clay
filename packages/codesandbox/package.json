@@ -1,0 +1,53 @@
+{
+	"name": "clay-codesandbox",
+	"main": "src/index.js",
+	"dependencies": {
+		"@clayui/alert": "latest",
+		"@clayui/autocomplete": "latest",
+		"@clayui/badge": "latest",
+		"@clayui/breadcrumb": "latest",
+		"@clayui/button": "latest",
+		"@clayui/card": "latest",
+		"@clayui/charts": "latest",
+		"@clayui/color-picker": "latest",
+		"@clayui/data-provider": "latest",
+		"@clayui/date-picker": "latest",
+		"@clayui/drop-down": "latest",
+		"@clayui/form": "latest",
+		"@clayui/icon": "latest",
+		"@clayui/label": "latest",
+		"@clayui/link": "latest",
+		"@clayui/list": "latest",
+		"@clayui/loading-indicator": "latest",
+		"@clayui/management-toolbar": "latest",
+		"@clayui/modal": "latest",
+		"@clayui/multi-select": "latest",
+		"@clayui/multi-step-nav": "latest",
+		"@clayui/nav": "latest",
+		"@clayui/navigation-bar": "latest",
+		"@clayui/pagination-bar": "latest",
+		"@clayui/pagination": "latest",
+		"@clayui/panel": "latest",
+		"@clayui/popover": "latest",
+		"@clayui/progress-bar": "latest",
+		"@clayui/shared": "latest",
+		"@clayui/slider": "latest",
+		"@clayui/sticker": "latest",
+		"@clayui/table": "latest",
+		"@clayui/tabs": "latest",
+		"@clayui/time-picker": "latest",
+		"@clayui/tooltip": "latest",
+		"react": "16.8.6",
+		"react-dom": "16.8.6",
+		"react-scripts": "3.0.1"
+	},
+	"devDependencies": {
+		"typescript": "3.3.3"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	}
+}
