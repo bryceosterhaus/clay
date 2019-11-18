@@ -74,5 +74,5 @@
 		"@clayui/time-picker": "packages/clay-time-picker",
 		"@clayui/tooltip": "packages/clay-tooltip"
 	},
-	"sandboxes": ["new", "packages/codesandbox"]
+	"sandboxes": ["packages/codesandbox"]
 }
