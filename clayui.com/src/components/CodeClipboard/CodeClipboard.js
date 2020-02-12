@@ -42,7 +42,7 @@ export default props => {
 		});
 
 		return () => {
-			clayClipboard.dispose();
+			clayClipboard.destroy();
 		};
 	}, []);
 
