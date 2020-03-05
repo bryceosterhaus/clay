@@ -44,24 +44,32 @@ function run() {
 		});
 
 	const bundler = new Bundler(entryFiles, {
-		outDir: 'ci-builds',
+		cacheDir: '.parcel-cache',
+		outDir: '.parcel-ci-builds',
 		sourceMaps: false,
 		watch: false,
 	});
 
 	bundler.on('bundled', () => {
-		const bundles = fs.readdirSync('ci-builds', {withFileTypes: true});
+		const bundles = fs.readdirSync('.parcel-ci-builds', {
+			withFileTypes: true,
+		});
 
 		const bundleData = {};
 
 		bundles.map(({name}) => {
 			bundleData[name] = getTotalSize(
-				path.join(__dirname, '../ci-builds/', name, 'lib/index.js')
+				path.join(
+					__dirname,
+					'../.parcel-ci-builds/',
+					name,
+					'lib/index.js'
+				)
 			);
 		});
 
 		fs.writeFileSync(
-			path.join(__dirname, '../ci-builds', 'info.json'),
+			path.join(__dirname, '../.parcel-ci-build.json'),
 			JSON.stringify(bundleData)
 		);
 	});
