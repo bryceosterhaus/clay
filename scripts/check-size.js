@@ -69,8 +69,14 @@ function run() {
 		});
 
 		fs.writeFileSync(
-			path.join(__dirname, '../.parcel-ci-build.json'),
-			JSON.stringify(bundleData)
+			path.join(__dirname, '../.parcel-ci-build.txt'),
+			`
+			|   |   |   |   |   |
+			|---|---|---|---|---|
+			|   |   |   |   |   |
+			|   |   |   |   |   |
+			|   |   |   |   |   |
+			`
 		);
 	});
 

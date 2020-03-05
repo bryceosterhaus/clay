@@ -36,6 +36,7 @@ const ClayBadge = React.forwardRef<HTMLSpanElement, IProps>(
 			className={classNames('badge', `badge-${displayType}`, className)}
 			ref={ref}
 		>
+			{'test'}
 			<span className="badge-item badge-item-expand">{label}</span>
 		</span>
 	)

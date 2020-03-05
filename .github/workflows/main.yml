@@ -1,0 +1,30 @@
+name: Share data between jobs
+
+on:
+    pull_request:
+        branches: [master]
+
+jobs:
+    job_1:
+        name: Run Build Stats and Upload
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - run: npm run checkSize --if-present
+              env:
+                  CI: true
+            - name: Upload result
+              uses: actions/upload-artifact@v1
+              with:
+                  name: build-info
+                  path: .parcel-ci-build.json
+            - name: comment PR
+              uses: machine-learning-apps/pr-comment@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  path: .parcel-ci-build.txt
