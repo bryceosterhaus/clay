@@ -4,29 +4,15 @@
  */
 
 const fs = require('fs');
+const Bundler = require('parcel-bundler');
 const path = require('path');
+const zlib = require('zlib');
 
 const WORKSPACE_PACKAGES_WHITELIST = [
 	'browserslist-config-clay',
 	'demos',
 	'generator-clay-component',
 ];
-
-const getAllFiles = function(dirPath, arrayOfFiles) {
-	const files = fs.readdirSync(dirPath);
-
-	arrayOfFiles = arrayOfFiles || [];
-
-	files.forEach(file => {
-		if (fs.statSync(`${dirPath}/${file}`).isDirectory()) {
-			arrayOfFiles = getAllFiles(`${dirPath}/${file}`, arrayOfFiles);
-		} else {
-			arrayOfFiles.push(path.join(dirPath, file));
-		}
-	});
-
-	return arrayOfFiles;
-};
 
 const convertBytes = function(bytes) {
 	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -44,28 +30,43 @@ const convertBytes = function(bytes) {
 	return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
 };
 
-const getTotalSize = function(directoryPath) {
-	const arrayOfFiles = getAllFiles(directoryPath);
-
-	let totalSize = 0;
-
-	arrayOfFiles.forEach(filePath => {
-		totalSize += fs.statSync(filePath).size;
-	});
-
-	return convertBytes(totalSize);
+const getTotalSize = function(filePath) {
+	return convertBytes(zlib.gzipSync(fs.readFileSync(filePath)).length);
 };
 
-async function run() {
+function run() {
 	const packages = fs.readdirSync('packages', {withFileTypes: true});
 
-	packages
+	const entryFiles = packages
 		.filter(({name}) => !WORKSPACE_PACKAGES_WHITELIST.includes(name))
-		.forEach(({name}) => {
-			const libPath = path.join(__dirname, '../packages/', name, 'lib');
-
-			console.log(name, getTotalSize(libPath));
+		.map(({name}) => {
+			return path.join(__dirname, '../packages/', name, 'lib/index.js');
 		});
+
+	const bundler = new Bundler(entryFiles, {
+		outDir: 'ci-builds',
+		sourceMaps: false,
+		watch: false,
+	});
+
+	bundler.on('bundled', () => {
+		const bundles = fs.readdirSync('ci-builds', {withFileTypes: true});
+
+		const bundleData = {};
+
+		bundles.map(({name}) => {
+			bundleData[name] = getTotalSize(
+				path.join(__dirname, '../ci-builds/', name, 'lib/index.js')
+			);
+		});
+
+		fs.writeFileSync(
+			path.join(__dirname, '../ci-builds', 'info.json'),
+			JSON.stringify(bundleData)
+		);
+	});
+
+	bundler.bundle();
 }
 
 run();
