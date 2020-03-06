@@ -17,7 +17,7 @@ jobs:
                   yarn checkSize
             - name: Post comment on PR
               env:
-                  URL: ${{ github.event.pull_request.review_comments_url }}
+                  URL: ${{ github.event.pull_request.comments_url }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   curl \
