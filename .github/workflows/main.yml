@@ -8,19 +8,22 @@ jobs:
     build_and_comment:
         runs-on: ubuntu-latest
         steps:
+            - name: Setup yarn
             - uses: actions/setup-node@v1
-              run: |
+            - run: |
                   npm install -g yarn
+            - name: Get stats at base
             - uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.pull_request.base.sha }}
-              run: |
+            - run: |
                   yarn install
                   yarn checkSize
+            - name: Get stats at HEAD
             - uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
-              run: |
+            - run: |
                   yarn install
                   yarn checkSize:compare
             - name: Post comment on PR
