@@ -8,15 +8,19 @@ jobs:
     build_and_comment:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Run checkSize.js
               run: |
                   npm install -g yarn
-                  git merge-base HEAD master | xargs git checkout
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.base.sha }}
+              run: |
                   yarn install
                   yarn checkSize
-                  git checkout $GITHUB_SHA
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+              run: |
                   yarn install
                   yarn checkSize:compare
             - name: Post comment on PR
