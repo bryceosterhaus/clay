@@ -5,6 +5,7 @@
 		"build:csb": "lerna run --no-bail --ignore \"clayui.com\" build && lerna run --no-bail --ignore \"clayui.com\" build:types",
 		"checkDeps": "lerna run --ignore \"clayui.com\" build && node scripts/check-deps/check-dependencies.js",
 		"checkSize": "lerna run --ignore \"clayui.com\" build && NODE_ENV=production node scripts/check-size.js",
+		"checkSize:compare": "lerna run --ignore \"clayui.com\" build && NODE_ENV=production node scripts/check-size.js --compare",
 		"ci": "yarn lint && yarn format:check && yarn test && yarn checkDeps",
 		"coveralls": "node node_modules/coveralls/bin/coveralls.js < coverage/lcov.info",
 		"format:all": "yarn lint:fix && yarn format",
