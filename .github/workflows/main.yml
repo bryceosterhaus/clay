@@ -13,8 +13,12 @@ jobs:
             - name: Run checkSize.js
               run: |
                   npm install -g yarn
+                  git merge-base HEAD master | xargs git checkout
                   yarn install
                   yarn checkSize
+                  git checkout $GITHUB_SHA
+                  yarn install
+                  yarn checkSize --compare
             - name: Post comment on PR
               env:
                   URL: ${{ github.event.pull_request.comments_url }}
