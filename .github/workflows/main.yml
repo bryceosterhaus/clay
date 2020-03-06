@@ -20,7 +20,7 @@ jobs:
                   yarn install
                   yarn checkSize
             - name: Upload stats as artifact
-                uses: actions/upload-artifact@v1
+              uses: actions/upload-artifact@v1
                 with:
                   name: base-stats
                   path: .parcel-ci-build.json
@@ -28,7 +28,7 @@ jobs:
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
             - name: Download stats artifact
-                uses: actions/download-artifact@v1
+              uses: actions/download-artifact@v1
                 with:
                   name: base-stats
             - name: Get stats at HEAD 
