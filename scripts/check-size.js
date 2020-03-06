@@ -13,6 +13,8 @@ const CLI_ARGS = process.argv.slice(2);
 const convertBytes = function(bytes) {
 	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
+	bytes = Math.abs(bytes);
+
 	if (bytes == 0) {
 		return '-';
 	}
@@ -26,8 +28,6 @@ const convertBytes = function(bytes) {
 	return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
 };
 
-// bundle	Size Change	Size	Gzip Change	Gzip
-
 function processMarkdownTable(prevStats, newStats) {
 	const diffedStats = Object.keys(prevStats).reduce((acc, key) => {
 		acc[key] = newStats[key] - prevStats[key];
@@ -40,11 +40,13 @@ function processMarkdownTable(prevStats, newStats) {
 |----|----|----|----|`;
 
 	Object.keys(prevStats).forEach(package => {
+		const lessThan = diffedStats[package] < 0;
+
 		table += `\n|${package}|${convertBytes(
 			newStats[package]
-		)}|${convertBytes(prevStats[package])}|${convertBytes(
-			diffedStats[package]
-		)}|`;
+		)}|${convertBytes(prevStats[package])}|${
+			lessThan ? '-' : '+'
+		}${convertBytes(diffedStats[package])}|`;
 	});
 
 	return `<details>
