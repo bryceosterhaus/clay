@@ -44,9 +44,8 @@ function processMarkdownTable(prevStats, newStats) {
 
 		table += `\n|${package}|${convertBytes(
 			newStats[package]
-		)}|${convertBytes(prevStats[package])}|${
-			lessThan ? '-' : '+'
-		}${convertBytes(diffedStats[package])}|`;
+		)}|${convertBytes(prevStats[package])}|${!!diffedStats[package] &&
+			(lessThan ? '-' : '+')}${convertBytes(diffedStats[package])}|`;
 	});
 
 	return `<details>
