@@ -8,22 +8,20 @@ jobs:
     build_and_comment:
         runs-on: ubuntu-latest
         steps:
-            - name: Run checkSize.js
-            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-              with:
-                node-version: '10.x'
-            - run: npm install -g yarn
-            - run: yarn install
-            - run: yarn checkSize
+            - name: Run checkSize.js
+              run: |
+                  npm install -g yarn
+                  yarn install
+                  yarn checkSize
             - name: Post comment on PR
               env:
-                URL: ${{ github.event.issue.comments_url }}
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  URL: ${{ github.event.issue.comments_url }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                curl \
-                    -X POST \
-                    $URL \
-                    -H "Content-Type: application/json" \
-                    -H "Authorization: token $GITHUB_TOKEN" \
-                    --data @.parcel-ci-build.json
+                  curl \
+                      -X POST \
+                      $URL \
+                      -H "Content-Type: application/json" \
+                      -H "Authorization: token $GITHUB_TOKEN" \
+                      --data @.parcel-ci-build.json
