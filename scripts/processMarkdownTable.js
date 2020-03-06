@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-function processMarkdownTable(dataJson) {
+function processMarkdownTable({diffedStats, newStats, prevStats}) {
 	let table = `
 |Package|Size|
 |----|----|`;
