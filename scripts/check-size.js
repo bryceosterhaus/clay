@@ -71,8 +71,10 @@ function run() {
 		});
 
 		fs.writeFileSync(
-			path.join(__dirname, '../.parcel-ci-build.txt'),
-			processMarkdownTable(bundleData)
+			path.join(__dirname, '../.parcel-ci-build.json'),
+			JSON.stringify({
+				body: processMarkdownTable(bundleData),
+			})
 		);
 	});
 
