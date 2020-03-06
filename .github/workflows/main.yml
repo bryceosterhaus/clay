@@ -16,8 +16,9 @@ jobs:
             - run: yarn install
             - run: yarn checkSize
             - name: Add comment to PR
-                URL: ${{ github.event.issue.comments_url }}
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                env:
+                    URL: ${{ github.event.issue.comments_url }}
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 run: |
                 curl \
                     -X POST \
