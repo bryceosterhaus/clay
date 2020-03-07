@@ -11,7 +11,7 @@ const zlib = require('zlib');
 const CLI_ARGS = process.argv.slice(2);
 
 const convertBytes = function(bytes) {
-	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+	const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
 
 	bytes = Math.abs(bytes);
 
@@ -30,9 +30,17 @@ const convertBytes = function(bytes) {
 
 function processMarkdownTable(prevStats, newStats) {
 	const diffedStats = Object.keys(prevStats).reduce((acc, key) => {
-		acc[key] = newStats[key] - prevStats[key];
+		const sizeDiff = newStats[key] - prevStats[key];
 
-		return acc;
+		if (sizeDiff === 0) {
+			return '-';
+		}
+
+		const diffPercent = `${(sizeDiff / prevStats[key]) * 100}%`;
+
+		const icon = sizeDiff > 0 ? '⬆︎' : '⬇︎';
+
+		return `${icon} ${convertBytes(sizeDiff)} (${diffPercent})`;
 	}, {});
 
 	let table = `
@@ -40,12 +48,11 @@ function processMarkdownTable(prevStats, newStats) {
 |----|----|----|----|`;
 
 	Object.keys(prevStats).forEach(package => {
-		const lessThan = diffedStats[package] < 0;
-
 		table += `\n|${package}|${convertBytes(
 			newStats[package]
-		)}|${convertBytes(prevStats[package])}|${!!diffedStats[package] &&
-			(lessThan ? '-' : '+')}${convertBytes(diffedStats[package])}|`;
+		)}|${convertBytes(prevStats[package])}|${convertBytes(
+			diffedStats[package]
+		)}|`;
 	});
 
 	return `<details>
