@@ -40,7 +40,9 @@ function processMarkdownTable(prevStats, newStats) {
 
 		const icon = sizeDiff > 0 ? '⬆︎' : '⬇︎';
 
-		return `${icon} ${convertBytes(sizeDiff)} (${diffPercent})`;
+		acc[key] = `${icon} ${convertBytes(sizeDiff)} (${diffPercent})`;
+
+		return acc;
 	}, {});
 
 	let table = `
