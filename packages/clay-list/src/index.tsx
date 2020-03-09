@@ -4,8 +4,5 @@
  */
 
 import ClayList from './List';
-import {ClayListWithItems} from './ListWithItems';
-
-export {ClayListWithItems};
 
 export default ClayList;
