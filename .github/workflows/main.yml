@@ -2,8 +2,7 @@ name: Comment Build Stats
 
 on:
     pull_request:
-        branches-ignore:
-            - '**'
+        branches: [master]
 
 jobs:
     build_and_comment:
