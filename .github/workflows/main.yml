@@ -38,7 +38,7 @@ jobs:
             - name: Post comment on PR
               env:
                   URL: ${{ github.event.pull_request.comments_url }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.BUILD_STATS_TOKEN }}
               run: |
                   curl \
                       -v \
