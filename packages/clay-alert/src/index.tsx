@@ -10,6 +10,15 @@ import React from 'react';
 import Footer from './Footer';
 import ToastContainer from './ToastContainer';
 
+
+
+
+
+
+
+
+
+
 const useAutoClose = (autoClose?: boolean | number, onClose = () => {}) => {
 	const startedTime = React.useRef<number>(0);
 	const timer = React.useRef<number | undefined>(undefined);
