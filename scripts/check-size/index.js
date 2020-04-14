@@ -76,7 +76,7 @@ function main() {
 			// eslint-disable-next-line
 			console.log(table);
 
-			if (totalDiff > THRESHHOLD) {
+			if (Math.abs(totalDiff) > THRESHHOLD) {
 				process.exit(1);
 			}
 		} else {
