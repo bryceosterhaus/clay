@@ -65,7 +65,8 @@ function main() {
 			// eslint-disable-next-line liferay/no-dynamic-require
 			const prevStats = require(path.join(
 				__dirname,
-				'../../.parcel-ci-build.json'
+				// Path comes from GH action artifact download
+				'../../base-stats/.parcel-ci-build.json'
 			));
 
 			const newStats = bundleData;
