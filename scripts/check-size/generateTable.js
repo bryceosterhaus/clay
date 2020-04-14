@@ -83,7 +83,7 @@ function processMarkdownTable(prevStats, newStats) {
 		return `${acc}\n|${row.join('|')}|`;
 	}, TABLE_HEADER);
 
-	return [table, totalDiffPercent];
+	return [`${table}\nTotal Diff: ${totalDiffPercent}%`, totalDiffPercent];
 }
 
 module.exports = processMarkdownTable;
