@@ -8,9 +8,11 @@ const Bundler = require('parcel-bundler');
 const path = require('path');
 const zlib = require('zlib');
 
-const processMarkdownTable = require('./processMarkdownTable');
+const generateTable = require('./generateTable');
 
 const CLI_ARGS = process.argv.slice(2);
+
+const THRESHHOLD = 5;
 
 const WORKSPACE_PACKAGES_WHITELIST = [
 	'browserslist-config-clay',
@@ -63,18 +65,19 @@ function main() {
 			// eslint-disable-next-line liferay/no-dynamic-require
 			const prevStats = require(path.join(
 				__dirname,
-				// Path comes from GH action artifact download
-				'../../base-stats/.parcel-ci-build.json'
+				'../../.parcel-ci-build.json'
 			));
 
 			const newStats = bundleData;
 
-			fs.writeFileSync(
-				path.join(__dirname, '../../.parcel-ci-build.json'),
-				JSON.stringify({
-					body: processMarkdownTable(prevStats, newStats),
-				})
-			);
+			const [table, totalDiff] = generateTable(prevStats, newStats);
+
+			// eslint-disable-next-line
+			console.log(table);
+
+			if (totalDiff > THRESHHOLD) {
+				process.exit(1);
+			}
 		} else {
 			fs.writeFileSync(
 				path.join(__dirname, '../../.parcel-ci-build.json'),
