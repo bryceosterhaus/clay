@@ -71,7 +71,7 @@ function main() {
 			const prevStats = require(path.join(
 				__dirname,
 				// Path comes from GH action artifact download
-				'../../.parcel-ci-build.json'
+				'../../base-stats/.parcel-ci-build.json'
 			));
 
 			const [table, totalDiff] = generateTable(prevStats, packageStats);
