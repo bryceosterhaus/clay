@@ -12,6 +12,7 @@ import {
 	bb,
 } from 'billboard.js';
 import React from 'react';
+import * as victory from 'victory';
 
 import BillboardWrapper from './BillboardWrapper';
 import GeoMap, {IProps} from './GeoMap';
@@ -85,6 +86,6 @@ const ClayChart = React.forwardRef<HTMLDivElement, IProps>(
 	}
 );
 
-export {bb};
+export {bb, victory};
 
 export default ClayChart;
