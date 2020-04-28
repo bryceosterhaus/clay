@@ -1,0 +1,23 @@
+name: Size Limit
+on:
+    pull_request:
+        branches: ['master']
+
+jobs:
+    generate_total:
+        name: Total Bundle Size
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout HEAD
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+            - uses: actions/setup-node@v1
+            - name: Setup
+              run: |
+                  npm install -g yarn
+                  yarn install
+                  yarn run bundle
+            - name: Generate Size
+              run: |
+                  yarn run checkSize
