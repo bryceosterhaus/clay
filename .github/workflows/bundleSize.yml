@@ -1,0 +1,23 @@
+name: Bundle Size
+on:
+    pull_request:
+        branches: ['master']
+
+jobs:
+    generate_total:
+        name: Total Bundle Size
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout HEAD
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+            - uses: actions/setup-node@v1
+            - name: Install yarn
+              run: |
+                  npm install -g yarn
+            - name: Generate
+              run: |
+                  yarn install
+                  yarn run bundle
+                  yarn run checkSize
