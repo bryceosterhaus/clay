@@ -9,7 +9,7 @@ export * from '@clayui/badge';
 export * from '@clayui/breadcrumb';
 export * from '@clayui/button';
 export * from '@clayui/card';
-// export * from '@clayui/charts'; This package alone practically doubles the build
+export * from '@clayui/charts'; // This package alone practically doubles the build
 export * from '@clayui/color-picker';
 export * from '@clayui/data-provider';
 export * from '@clayui/date-picker';
