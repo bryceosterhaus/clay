@@ -21,12 +21,8 @@ class Navigation extends Component {
 	 * @param {!number} index
 	 * @param {!number} depth
 	 * @param {!object} section
-	 * @param {!event} event
 	 */
-	handleOnClick(index, depth, section, event) {
-		event.preventDefault();
-		event.stopPropagation();
-
+	handleOnClick(index, depth, section) {
 		// eslint-disable-next-line react/no-string-refs
 		const elementRef = this.refs[`navItem${index}${depth}`];
 
@@ -82,10 +78,10 @@ class Navigation extends Component {
 				>
 					<Anchor
 						location={location}
-						onclick={(event) =>
-							this.handleOnClick(index, depth, section, event)
-						}
 						onnavigation={() => this.handleOnNavigation()}
+						onToggleCollapse={() =>
+							this.handleOnClick(index, depth, section)
+						}
 						page={section}
 					/>
 
@@ -114,26 +110,30 @@ class Navigation extends Component {
 	}
 }
 
-const Anchor = ({location, onclick, onnavigation, page}) => {
+const Anchor = ({location, onToggleCollapse, onnavigation, page}) => {
 	const link = `${page.link}.html`;
-	const TagName =
+
+	const onClick =
 		location.pathname === link || (page.items && !page.indexVisible)
-			? 'a'
-			: Link;
-	const props =
-		location.pathname === link || (page.items && !page.indexVisible)
-			? {href: '#openNav', onClick: onclick}
-			: {onClick: onnavigation, to: link};
+			? onToggleCollapse
+			: onnavigation;
 
 	return (
-		<TagName className="nav-link" {...props}>
+		<Link className="nav-link" onClick={onClick} to={link}>
 			<span className="c-inner" tabIndex="-1">
 				{page.title}
+
 				{page.items && (
 					<svg
 						className="collapse-toggle"
-						focusable="false"
+						focusable
 						name="keyboardArrowRight"
+						onClick={event => {
+							event.preventDefault();
+							event.stopPropagation();
+
+							onToggleCollapse();
+						}}
 						role="presentation"
 					>
 						<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
@@ -141,7 +141,7 @@ const Anchor = ({location, onclick, onnavigation, page}) => {
 					</svg>
 				)}
 			</span>
-		</TagName>
+		</Link>
 	);
 };
 
