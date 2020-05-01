@@ -7,19 +7,18 @@ jobs:
     run:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
             - name: Install yarn
               run: npm install -g yarn
-            - name: Checkout BASE
-              uses: actions/checkout@v2
             - name: Install Dependencies
               run: yarn install
-            - name: Check Formatting
-              run: |
-                  yarn lint
-                  yarn format:check
-            - name: Verify Dependencies
-              run: yarn checkDeps
+            # - name: Check Formatting
+            #   run: |
+            #       yarn lint
+            #       yarn format:check
+            # - name: Verify Dependencies
+            #   run: yarn checkDeps
             - name: Run Jest
               env:
                   CI: true
