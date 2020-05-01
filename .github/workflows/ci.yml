@@ -32,12 +32,12 @@ jobs:
                   path-to-lcov: ./coverage/lcov.info
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   parallel: true
-  finish:
-    needs: run
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Report
-      uses: coverallsapp/github-action@v1.1.1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        parallel-finished: true
+    finish:
+        needs: run
+        runs-on: ubuntu-latest
+        steps:
+            - name: Coveralls Report
+              uses: coverallsapp/github-action@v1.1.1
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  parallel-finished: true
