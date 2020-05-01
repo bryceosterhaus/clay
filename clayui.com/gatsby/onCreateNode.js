@@ -56,7 +56,7 @@ module.exports = exports.onCreateNode = ({actions, getNode, node}) => {
 		let pkgStatus = packageStatus;
 
 		if (pkgVersion && packageNpm) {
-			const isBeta = ['beta', 'alpha', 'milestone'].some((subs) =>
+			const isBeta = ['beta', 'alpha', 'milestone'].some(subs =>
 				pkgVersion.includes(subs)
 			);
 
@@ -67,7 +67,10 @@ module.exports = exports.onCreateNode = ({actions, getNode, node}) => {
 			if (sourceInstanceName === 'packages' && title) {
 				const fileName = path.basename(relativePath).split('.')[0];
 
-				if (relativePath.includes('README')) {
+				if (
+					sourceInstanceName === 'packages' &&
+					relativePath.includes('index')
+				) {
 					slug = `docs/components/${packageNpm.replace(
 						'@clayui/',
 						''
@@ -79,7 +82,7 @@ module.exports = exports.onCreateNode = ({actions, getNode, node}) => {
 				}
 			}
 
-			if (relativePath.includes('docs')) {
+			if (sourceInstanceName === 'content') {
 				if (relativePath.endsWith('.md')) {
 					slug = relativePath.replace('.md', '.html');
 				} else {
