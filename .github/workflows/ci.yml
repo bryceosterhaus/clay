@@ -26,8 +26,18 @@ jobs:
               env:
                   CI: true
               run: yarn test --coverage
-            - name: Generate Coverage Report
+            - name: Push to Coveralls
               uses: coverallsapp/github-action@v1.1.1
               with:
                   path-to-lcov: ./coverage/lcov.info
                   github-token: ${{ secrets.GITHUB_TOKEN }}
+                  parallel: true
+  finish:
+    needs: run
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Report
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
