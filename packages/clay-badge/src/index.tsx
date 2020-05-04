@@ -21,7 +21,7 @@ interface IProps extends React.HTMLAttributes<HTMLSpanElement> {
 	displayType?: DisplayType;
 
 	/**
-	 * Info that is shown inside of the badge itself.
+	 * Info that is shown inside of the badge itself. test
 	 */
 	label?: string | number;
 }
