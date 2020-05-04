@@ -12,6 +12,7 @@ jobs:
             - name: Install yarn
               run: |
                   npm install -g yarn
+                  yarn global add lerna
             - name: Checkout BASE
               uses: actions/checkout@v2
               with:
