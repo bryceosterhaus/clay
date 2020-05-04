@@ -12,7 +12,6 @@ jobs:
             - name: Install yarn
               run: |
                   npm install -g yarn
-                  yarn global add lerna
             - name: Checkout BASE
               uses: actions/checkout@v2
               with:
@@ -20,7 +19,7 @@ jobs:
             - name: Generate Build Info
               run: |
                   yarn install
-                  lerna run --ignore \"clayui.com\" build
+                  node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
                   yarn genBuildSize
             - name: Clean directory
               run: |
@@ -34,7 +33,7 @@ jobs:
             - name: Generate Bundle Size Table
               run: |
                   yarn install
-                  lerna run --ignore \"clayui.com\" build
+                  node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
                   yarn genBuildSize:compare
             - name: Generate Total Size
               run: |
