@@ -8,6 +8,7 @@ const spritemap = require('@clayui/css/lib/images/icons/icons.svg');
 import {ClayDropDownWithItems} from '@clayui/drop-down';
 import {ClayCheckbox, ClayInput} from '@clayui/form';
 import ClayIcon from '@clayui/icon';
+import ClayLayout from '@clayui/layout';
 import {ClayListWithItems} from '@clayui/list';
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import {ClayPaginationBarWithBasicItems} from '@clayui/pagination-bar';
@@ -296,7 +297,7 @@ export default () => {
 				)}
 			</ClayManagementToolbar>
 
-			<div className="container" style={{paddingTop: 8}}>
+			<ClayLayout.Container style={{paddingTop: 8}}>
 				<ClayListWithItems
 					itemIdentifier="classPK"
 					items={[
@@ -318,7 +319,7 @@ export default () => {
 					spritemap={spritemap}
 					totalItems={totalItems}
 				/>
-			</div>
+			</ClayLayout.Container>
 		</div>
 	);
 };

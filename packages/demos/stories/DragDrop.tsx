@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+import ClayLayout from '@clayui/layout';
 import ClayList from '@clayui/list';
 import {XYCoord} from 'dnd-core';
 import React, {useCallback, useRef, useState} from 'react';
@@ -170,17 +171,21 @@ const DraggableList: React.FunctionComponent = () => {
 	);
 
 	return (
-		<ClayList className="col-4">
-			{listItems.map((listItem, index) => (
-				<DraggableListItem
-					id={listItem.id}
-					index={index}
-					key={listItem.id}
-					onMove={onMove}
-					text={listItem.text}
-				/>
-			))}
-		</ClayList>
+		<ClayLayout.Container view>
+			<ClayLayout.Row>
+				<ClayLayout.Col containerElement={ClayList} size={8}>
+					{listItems.map((listItem, index) => (
+						<DraggableListItem
+							id={listItem.id}
+							index={index}
+							key={listItem.id}
+							onMove={onMove}
+							text={listItem.text}
+						/>
+					))}
+				</ClayLayout.Col>
+			</ClayLayout.Row>
+		</ClayLayout.Container>
 	);
 };
 
