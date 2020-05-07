@@ -8,6 +8,14 @@ import React from 'react';
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 	/**
+	 * Element or component to render for container
+	 */
+	containerElement?: React.JSXElementConstructor<{
+		className: string;
+		[key: string]: any;
+	}>;
+
+	/**
 	 * Adds `.container-fluid` class to create a fluid container that
 	 * doesn't expand beyond a set width
 	 */
@@ -36,6 +44,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 const ClayContainer: React.FunctionComponent<IProps> = ({
 	children,
 	className,
+	containerElement: ContainerElement = 'div',
 	fluid,
 	fluidSize,
 	formSize,
@@ -43,7 +52,7 @@ const ClayContainer: React.FunctionComponent<IProps> = ({
 	...otherProps
 }) => {
 	return (
-		<div
+		<ContainerElement
 			{...otherProps}
 			className={classNames(className, {
 				container: !fluid,
@@ -54,7 +63,7 @@ const ClayContainer: React.FunctionComponent<IProps> = ({
 			})}
 		>
 			{children}
-		</div>
+		</ContainerElement>
 	);
 };
 

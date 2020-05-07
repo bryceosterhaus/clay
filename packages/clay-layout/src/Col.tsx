@@ -15,6 +15,14 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 	align?: 'start' | 'center' | 'end';
 
 	/**
+	 * Element or component to render for container
+	 */
+	containerElement?: React.JSXElementConstructor<{
+		className: string;
+		[key: string]: any;
+	}>;
+
+	/**
 	 * The number of columns to span on extra-small devices
 	 */
 	xs?: TColSize;
@@ -49,6 +57,7 @@ const ClayCol: React.FunctionComponent<IProps> = ({
 	align,
 	children,
 	className,
+	containerElement: ContainerElement = 'div',
 	lg,
 	md,
 	order,
@@ -60,7 +69,7 @@ const ClayCol: React.FunctionComponent<IProps> = ({
 	const noBreakPoints = !lg && !md && !sm && !xs && !size;
 
 	return (
-		<div
+		<ContainerElement
 			{...otherProps}
 			className={classNames(className, {
 				[`align-self${align}`]: align,
@@ -78,7 +87,7 @@ const ClayCol: React.FunctionComponent<IProps> = ({
 			})}
 		>
 			{children}
-		</div>
+		</ContainerElement>
 	);
 };
 

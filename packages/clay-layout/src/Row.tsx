@@ -13,6 +13,14 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 	align?: 'start' | 'center' | 'end';
 
 	/**
+	 * Element or component to render for container
+	 */
+	containerElement?: React.JSXElementConstructor<{
+		className: string;
+		[key: string]: any;
+	}>;
+
+	/**
 	 * This removes the negative margins from .row and the
 	 * horizontal padding from all immediate children columns
 	 */
@@ -28,12 +36,13 @@ const ClayRow: React.FunctionComponent<IProps> = ({
 	align,
 	children,
 	className,
+	containerElement: ContainerElement = 'div',
 	gutters = true,
 	justify,
 	...otherProps
 }) => {
 	return (
-		<div
+		<ContainerElement
 			{...otherProps}
 			className={classNames('row', className, {
 				'no-gutters': !gutters,
@@ -42,7 +51,7 @@ const ClayRow: React.FunctionComponent<IProps> = ({
 			})}
 		>
 			{children}
-		</div>
+		</ContainerElement>
 	);
 };
 
