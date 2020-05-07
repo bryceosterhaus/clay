@@ -9,7 +9,7 @@ import React from 'react';
 
 import ClayLayout from '../src';
 
-const colExampleStyles = {
+const exampleStyles = {
 	backgroundColor: 'rgba(86,61,124,.15)',
 	border: '1px solid rgba(86,61,124,.2)',
 	paddingBottom: '.75rem',
@@ -17,7 +17,7 @@ const colExampleStyles = {
 };
 
 const ClayDemoColumn: typeof ClayLayout.Col = (props) => (
-	<ClayLayout.Col style={colExampleStyles} {...props} />
+	<ClayLayout.Col style={exampleStyles} {...props} />
 );
 
 storiesOf('Components|ClayLayout', module)
@@ -93,6 +93,37 @@ storiesOf('Components|ClayLayout', module)
 			<ClayLayout.Row>
 				<ClayDemoColumn size={6}>{'.col-6'}</ClayDemoColumn>
 				<ClayDemoColumn size={6}>{'.col-6'}</ClayDemoColumn>
+			</ClayLayout.Row>
+		</ClayLayout.Container>
+	))
+	.add('Grid', () => (
+		<ClayLayout.Grid>
+			<div style={exampleStyles}>{'1'}</div>
+			<div style={exampleStyles}>{'2'}</div>
+			<div style={exampleStyles}>{'3'}</div>
+			<div style={exampleStyles}>{'4'}</div>
+			<div style={exampleStyles}>{'5'}</div>
+			<div style={exampleStyles}>{'6'}</div>
+			<div style={exampleStyles}>{'7'}</div>
+			<div style={exampleStyles}>{'8'}</div>
+			<div style={exampleStyles}>{'9'}</div>
+			<div style={exampleStyles}>{'10'}</div>
+		</ClayLayout.Grid>
+	))
+	.add('Sidebar+Content', () => (
+		<ClayLayout.Container view>
+			<ClayLayout.Row>
+				<ClayLayout.Col md={3}>
+					<div style={{...exampleStyles, height: 600, padding: 24}}>
+						{'Sidebar'}
+					</div>
+				</ClayLayout.Col>
+
+				<ClayLayout.Col md={9}>
+					<div style={{...exampleStyles, height: 600, padding: 24}}>
+						{'Content'}
+					</div>
+				</ClayLayout.Col>
 			</ClayLayout.Row>
 		</ClayLayout.Container>
 	));

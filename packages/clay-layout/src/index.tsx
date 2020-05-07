@@ -5,8 +5,9 @@
 
 import Col from './Col';
 import Container from './Container';
+import Grid from './Grid';
 import Row from './Row';
 
-export {Col, Container, Row};
+export {Col, Container, Grid, Row};
 
-export default {Col, Container, Row};
+export default {Col, Container, Grid, Row};
