@@ -131,6 +131,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 		);
 
 	const showDismissible = onClose && !hideCloseIcon;
+	console.log('test');
 
 	return (
 		<div
