@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ['master', 'stable']
+  push:
+    branches: ['master', 'stable']
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+
+      - name: Install
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: Formatting
+        run: |
+          yarn lint
+          yarn format:check
+
+      - name: Dependencies
+        run: yarn checkDeps
+
+      - name: Build
+        if: ${{ success() }}
+        run: yarn build
+
+  test:
+    needs: setup
+    - name: Jest
+      env:
+        CI: true
+      run: yarn test --coverage
+
+    - name: Coveralls
+      if: ${{ success() }}
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        path-to-lcov: ./coverage/lcov.info
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  stats:
+    needs: setup
+    - name: Checkout BASE
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.base.sha }}
+
+    - name: Generate Build Info
+      run: yarn genBuildSize
+
+    - name: Clean directory
+      if: ${{ success() }}
+      run: |
+        git clean -ffdx --exclude /tmp
+        git reset --hard HEAD
+
+    - name: Checkout HEAD
+      if: ${{ success() }}
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        clean: false
+
+    - name: Generate Bundle Size Table
+      if: ${{ success() }}
+      run: |
+        yarn install
+        node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
+        yarn genBuildSize:compare
+
+    - name: Generate Total Size
+      if: ${{ success() }}
+      run: yarn run sizeLimit
+
+  netlify:
+    needs: setup
+    - name: Storybook
+      run: yarn storybook:build
+
+    - name: Clayui.com
+      run: cd clayui.com && yarn build
+
