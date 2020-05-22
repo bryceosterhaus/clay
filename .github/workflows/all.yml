@@ -16,7 +16,7 @@ jobs:
             - uses: actions/setup-node@v1
 
             - name: clayui.com changes
-              run: git diff ${{ github.event.pull_request.base.sha }} HEAD clayui.com
+              run: git diff ${{ github.base_ref }} HEAD clayui.com
             - name: Build clayui.com
               if: ${{ success() }}
               run: echo "run clayui.com"
@@ -29,7 +29,7 @@ jobs:
             - uses: actions/setup-node@v1
               
             - name: storybook changes
-              run: git diff ${{ github.event.pull_request.base.sha }} HEAD packages
+              run: git diff ${{ github.base_ref }} HEAD packages
             - name: Build Storybook
               if: ${{ success() }}
               run: echo "run storybook"
