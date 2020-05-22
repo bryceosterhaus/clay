@@ -16,7 +16,7 @@ jobs:
             - uses: actions/setup-node@v1
 
             - name: Check Formatting
-              run: git diff ${{ github.event.pull_request.base.sha }} HEAD
+              run: git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.base.sha }}
 
             - name: Verify Dependencies
               if: ${{ success() }}
