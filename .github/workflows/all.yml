@@ -9,107 +9,15 @@ on:
         # branches: ['master', 'stable']
 
 jobs:
-    netlify:
+    build:
         runs-on: ubuntu-latest
-        needs: [build, test]
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install dependencies
-              run: |
-                  npm install -g yarn
-                  yarn install
-            - name: Build Storybook
-              if: ${{ git diff github.event.pull_request.base.sha HEAD }}
-              run: yarn storybook:build
 
-            - name: Build clayui.com
-              run: cd clayui.com && yarn build
-    # build:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v2
-    #         - uses: actions/setup-node@v1
-    #         - name: Install dependencies
-    #           if: ${{ git diff github.event.pull_request.base.sha HEAD }}
-    #           run: |
-    #               npm install -g yarn
-    #               yarn install
-    #         - name: Check Formatting
-    #           run: |
-    #               yarn lint
-    #               yarn format:check
-    #         - name: Verify Dependencies
-    #           run: yarn checkDeps
-    #         - name: Build Packages
-    #           if: ${{ success() }}
-    #           run: yarn build
-    # test:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v2
-    #         - uses: actions/setup-node@v1
-    #         - name: Install dependencies
-    #           run: |
-    #               npm install -g yarn
-    #               yarn install
-    #         - name: Jest
-    #           env:
-    #               CI: true
-    #           run: yarn test --coverage
-    #         - name: Push to Coveralls
-    #           if: ${{ success() }}
-    #           uses: coverallsapp/github-action@v1.1.1
-    #           with:
-    #               path-to-lcov: ./coverage/lcov.info
-    #               github-token: ${{ secrets.GITHUB_TOKEN }}
-    # netlify:
-    #     runs-on: ubuntu-latest
-    #     needs: [build, test]
-    #     steps:
-    #         - uses: actions/checkout@v2
-    #         - uses: actions/setup-node@v1
-    #         - name: Install dependencies
-    #           run: |
-    #               npm install -g yarn
-    #               yarn install
-    #         - name: Build Storybook
-    #           if: ${{ git diff github.event.pull_request.base.sha HEAD }}
-    #           run: yarn storybook:build
-    #         - name: Build clayui.com
-    #           run: cd clayui.com && yarn build
-    # stats:
-    #     runs-on: ubuntu-latest
-    #     needs: [build, netlify, test]
-    #     steps:
-    #         - uses: actions/setup-node@v1
-    #         - name: Install dependencies
-    #           run: |
-    #               npm install -g yarn
-    #               yarn install
-    #         - name: Checkout BASE
-    #           uses: actions/checkout@v2
-    #           with:
-    #               ref: ${{ github.event.pull_request.base.sha }}
-    #         - name: Generate Build Info
-    #           run: yarn genBuildSize
-    #         - name: Clean directory
-    #           if: ${{ success() }}
-    #           run: |
-    #               git clean -ffdx --exclude /tmp
-    #               git reset --hard HEAD
-    #         - name: Checkout HEAD
-    #           if: ${{ success() }}
-    #           uses: actions/checkout@v2
-    #           with:
-    #               ref: ${{ github.event.pull_request.head.sha }}
-    #               clean: false
-    #         - name: Generate Bundle Size Table
-    #           if: ${{ success() }}
-    #           run: |
-    #               yarn install
-    #               node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
-    #               yarn genBuildSize:compare
-    #         - name: Generate Total Size
-    #           if: ${{ success() }}
-    #           run: yarn run sizeLimit
+            - name: Check Formatting
+              run: git diff ${{ github.event.pull_request.base.sha }} HEAD
+
+            - name: Verify Dependencies
+              if: ${{ success() }}
+              run: echo "run"
