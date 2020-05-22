@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import React from 'react';
 
 import Footer from './Footer';
+
+// test
 import ToastContainer from './ToastContainer';
 
 const useAutoClose = (autoClose?: boolean | number, onClose = () => {}) => {
@@ -130,7 +132,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 		) : (
 			<>{children}</>
 		);
-
+	// test foo
 	const showDismissible = onClose && !hideCloseIcon;
 
 	return (
