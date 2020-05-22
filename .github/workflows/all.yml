@@ -9,14 +9,27 @@ on:
         # branches: ['master', 'stable']
 
 jobs:
-    netlify:
+    clayui:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Build Storybook
-              if: git diff ${{ github.event.pull_request.base.sha }} HEAD clayui.com
-              run: yarn storybook:build
 
+            - name: clayui.com changes
+              run: git diff ${{ github.event.pull_request.base.sha }} HEAD clayui.com
             - name: Build clayui.com
-              run: cd clayui.com && yarn build
+              if: ${{ success() }}
+              run: echo "run clayui.com"
+
+
+    storybook:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              
+            - name: storybook changes
+              run: git diff ${{ github.event.pull_request.base.sha }} HEAD packages
+            - name: Build Storybook
+              if: ${{ success() }}
+              run: echo "run storybook"
