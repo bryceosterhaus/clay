@@ -16,10 +16,10 @@ jobs:
             - uses: actions/setup-node@v1
 
             - name: fetch base
-              run: git fetch ${{ github.event.pull_request.base.sha }}
+              run: git fetch --no-tags --depth=1 origin ${{ github.base_ref }}
 
             - name: Storybook
-              run: git diff-tree --exit-code -r ${{ github.event.pull_request.base.sha }} packages
+              run: git diff-tree --exit-code -r ${{ github.base_ref }}
 
             - name: Verify Dependencies
               if: ${{ success() }}
