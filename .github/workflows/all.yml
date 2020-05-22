@@ -14,12 +14,8 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install dependencies
-              run: |
-                  npm install -g yarn
-                  yarn install
             - name: Build Storybook
-              if: git diff ${{ github.event.pull_request.base.sha }} HEAD
+              if: git diff ${{ github.event.pull_request.base.sha }} HEAD clayui.com
               run: yarn storybook:build
 
             - name: Build clayui.com
