@@ -13,12 +13,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-              with:
-                  fetch-depth: 50
             - uses: actions/setup-node@v1
 
-            - name: Check Formatting
-              run: git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.base.sha }}
+            - name: fetch base
+              run: git fetch ${{ github.event.pull_request.base.sha }}
+
+            - name: Storybook
+              run: git diff-tree --exit-code -r ${{ github.event.pull_request.base.sha }} packages
 
             - name: Verify Dependencies
               if: ${{ success() }}
