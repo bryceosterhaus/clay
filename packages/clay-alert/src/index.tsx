@@ -123,7 +123,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 		autoClose,
 		onClose
 	);
-
+	// test
 	const ConditionalContainer: React.FunctionComponent<{}> = ({children}) =>
 		variant === 'stripe' ? (
 			<div className="container">{children}</div>
@@ -145,6 +145,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 			onMouseOver={pauseAutoCloseTimer}
 			role="alert"
 		>
+			<div></div>
 			<ConditionalContainer>
 				<ClayLayout.ContentRow className="alert-autofit-row">
 					<ClayLayout.ContentCol>

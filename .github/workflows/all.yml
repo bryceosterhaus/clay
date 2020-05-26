@@ -1,0 +1,31 @@
+name: CI
+
+on:
+    pull_request:
+        branches: ['master-netlify']
+        # branches: ['master', 'stable']
+    push:
+        branches: ['master-netlify']
+        # branches: ['master', 'stable']
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+
+            - name: Fetch and Diff
+              id: diff
+              run: |
+                  git fetch --no-tags --depth=1 origin ${{ github.event.pull_request.base.sha }}
+                  echo "##[set-output name=storybook;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} '**/stories*' '**/src*')"
+                  echo "##[set-output name=clayui;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} clayui.com '**/*.mdx' '**/docs*')"
+
+            - name: Build Storybook
+              if: ${{ steps.diff.outputs.storybook }}
+              run: echo "run"
+
+            - name: Build clayui
+              if: ${{ steps.diff.outputs.clayui }}
+              run: echo "run"
