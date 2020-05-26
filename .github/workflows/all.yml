@@ -14,11 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install
-              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
-              run: |
-                  npm install -g yarn
-                  yarn install
             - name: Get yarn cache directory path
               id: yarn-cache-dir-path
               run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -29,6 +24,11 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
                   restore-keys: |
                       ${{ runner.os }}-yarn-
+            - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+              run: |
+                  npm install -g yarn
+                  yarn install
 
             - name: Formatting
               run: |
@@ -47,11 +47,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install
-              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
-              run: |
-                  npm install -g yarn
-                  yarn install
             - name: Get yarn cache directory path
               id: yarn-cache-dir-path
               run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -62,6 +57,11 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
                   restore-keys: |
                       ${{ runner.os }}-yarn-
+            - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+              run: |
+                  npm install -g yarn
+                  yarn install
 
             - name: Jest
               env:
@@ -81,11 +81,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install
-              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
-              run: |
-                  npm install -g yarn
-                  yarn install
             - name: Get yarn cache directory path
               id: yarn-cache-dir-path
               run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -96,6 +91,11 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
                   restore-keys: |
                       ${{ runner.os }}-yarn-
+            - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+              run: |
+                  npm install -g yarn
+                  yarn install
 
             - name: Checkout BASE
               uses: actions/checkout@v2
@@ -133,11 +133,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - name: Install
-              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
-              run: |
-                  npm install -g yarn
-                  yarn install
             - name: Get yarn cache directory path
               id: yarn-cache-dir-path
               run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -148,6 +143,11 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
                   restore-keys: |
                       ${{ runner.os }}-yarn-
+            - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+              run: |
+                  npm install -g yarn
+                  yarn install
 
             - name: Fetch and Diff
               id: diff
