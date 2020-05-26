@@ -23,13 +23,17 @@ jobs:
               run: git fetch --no-tags --depth=1 origin ${{ github.event.pull_request.base.sha }}
 
             - name: Storybook
+              id: storybook-diff
               run: git diff-tree --exit-code -r ${{ github.event.pull_request.base.sha }} packages
 
             - name: clayui.com
+              id: clayui-diff
               run: git diff-tree --exit-code -r ${{ github.event.pull_request.base.sha }} clayui.com
 
             - name: Build Storybook
+            if: ${{ steps.storybook-diff.conclusion}}
               run: echo "run"
 
            - name: Build clayui
+              if: ${{ steps.clayui-diff.conclusion}}
               run: echo "run"
