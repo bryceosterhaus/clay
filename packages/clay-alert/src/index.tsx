@@ -145,7 +145,6 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 			onMouseOver={pauseAutoCloseTimer}
 			role="alert"
 		>
-			<div></div>
 			<ConditionalContainer>
 				<ClayLayout.ContentRow className="alert-autofit-row">
 					<ClayLayout.ContentCol>
