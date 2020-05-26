@@ -31,9 +31,9 @@ jobs:
               run: git diff-tree --exit-code -r ${{ github.event.pull_request.base.sha }} clayui.com
 
             - name: Build Storybook
-              if: ${{ steps.storybook-diff.conclusion}}
+              if: ${{ steps.storybook-diff.conclusion === 'success' }}
               run: echo "run"
 
            - name: Build clayui
-              if: ${{ steps.clayui-diff.conclusion}}
+              if: ${{ steps.clayui-diff.conclusion === 'success' }}
               run: echo "run"
