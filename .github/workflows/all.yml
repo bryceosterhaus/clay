@@ -8,13 +8,21 @@ on:
         branches: ['master-netlify']
         # branches: ['master', 'stable']
 
-# - name: Cache Dependencies and Build
-#   uses: actions/cache@v2
-#   with:
-#     path: |
-#       **/build
-#       **/node_modules
-#     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+- name: Install
+  if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+  run: |
+      npm install -g yarn
+      yarn install
+- name: Get yarn cache directory path
+  id: yarn-cache-dir-path
+  run: echo "::set-output name=dir::$(yarn cache dir)"
+- uses: actions/cache@v2
+  id: yarn-cache
+  with:
+    path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+    key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+    restore-keys: |
+      ${{ runner.os }}-yarn-
 
 jobs:
     setup:
@@ -22,11 +30,21 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: c-hive/gha-yarn-cache@v1
             - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
               run: |
                   npm install -g yarn
                   yarn install
+            - name: Get yarn cache directory path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-yarn-
 
             - name: Formatting
               run: |
@@ -45,11 +63,21 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: c-hive/gha-yarn-cache@v1
             - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
               run: |
                   npm install -g yarn
                   yarn install
+            - name: Get yarn cache directory path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-yarn-
 
             - name: Jest
               env:
@@ -69,11 +97,21 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: c-hive/gha-yarn-cache@v1
             - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
               run: |
                   npm install -g yarn
                   yarn install
+            - name: Get yarn cache directory path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-yarn-
 
             - name: Checkout BASE
               uses: actions/checkout@v2
@@ -111,11 +149,21 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: c-hive/gha-yarn-cache@v1
             - name: Install
+              if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
               run: |
                   npm install -g yarn
                   yarn install
+            - name: Get yarn cache directory path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-yarn-
 
             - name: Fetch and Diff
               id: diff
