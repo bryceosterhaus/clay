@@ -132,7 +132,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 		) : (
 			<>{children}</>
 		);
-
+	// test
 	const showDismissible = onClose && !hideCloseIcon;
 
 	return (
