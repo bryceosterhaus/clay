@@ -9,93 +9,94 @@ on:
         # branches: ['master', 'stable']
 
 jobs:
-  setup:
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - uses: c-hive/gha-yarn-cache@v1
+    setup:
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+            - uses: c-hive/gha-yarn-cache@v1
 
-      - name: Install
-        run: |
-          npm install -g yarn
-          yarn install
-      - name: Formatting
-        run: |
-          yarn lint
-          yarn format:check
-      - name: Dependencies
-        run: yarn checkDeps
+            - name: Install
+              run: |
+                  npm install -g yarn
+                  yarn install
+            - name: Formatting
+              run: |
+                  yarn lint
+                  yarn format:check
+            - name: Dependencies
+              run: yarn checkDeps
 
-      - name: Build
-        if: ${{ success() }}
-        run: yarn build
+            - name: Build
+              if: ${{ success() }}
+              run: yarn build
 
-  test:
-    needs: setup
-    - uses: c-hive/gha-yarn-cache@v1
-    - name: Jest
-      env:
-        CI: true
-      run: yarn test --coverage
+    test:
+        needs: setup
+        steps:
+            - uses: c-hive/gha-yarn-cache@v1
+            - name: Jest
+              env:
+                  CI: true
+              run: yarn test --coverage
 
-    - name: Coveralls
-      if: ${{ success() }}
-      uses: coverallsapp/github-action@v1.1.1
-      with:
-        path-to-lcov: ./coverage/lcov.info
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Coveralls
+              if: ${{ success() }}
+              uses: coverallsapp/github-action@v1.1.1
+              with:
+                  path-to-lcov: ./coverage/lcov.info
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  stats:
-    needs: setup
-    - uses: c-hive/gha-yarn-cache@v1
-    - name: Checkout BASE
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.base.sha }}
+    stats:
+        needs: setup
+        steps:
+            - uses: c-hive/gha-yarn-cache@v1
+            - name: Checkout BASE
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.base.sha }}
 
-    - name: Generate Build Info
-      run: yarn genBuildSize
+            - name: Generate Build Info
+              run: yarn genBuildSize
 
-    - name: Clean directory
-      if: ${{ success() }}
-      run: |
-        git clean -ffdx --exclude /tmp
-        git reset --hard HEAD
-    - name: Checkout HEAD
-      if: ${{ success() }}
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        clean: false
+            - name: Clean directory
+              if: ${{ success() }}
+              run: |
+                  git clean -ffdx --exclude /tmp
+                  git reset --hard HEAD
+            - name: Checkout HEAD
+              if: ${{ success() }}
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  clean: false
 
-    - name: Generate Bundle Size Table
-      if: ${{ success() }}
-      run: |
-        yarn install
-        node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
-        yarn genBuildSize:compare
-    - name: Generate Total Size
-      if: ${{ success() }}
-      run: yarn run sizeLimit
+            - name: Generate Bundle Size Table
+              if: ${{ success() }}
+              run: |
+                  yarn install
+                  node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
+                  yarn genBuildSize:compare
+            - name: Generate Total Size
+              if: ${{ success() }}
+              run: yarn run sizeLimit
 
-  netlify:
-      needs: [setup, test]
-      runs-on: ubuntu-latest
-      steps:
-          - uses: actions/checkout@v2
-          - uses: actions/setup-node@v1
+    netlify:
+        needs: [setup, test]
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
 
-          - name: Fetch and Diff
-            id: diff
-            run: |
-                git fetch --no-tags --depth=1 origin ${{ github.event.pull_request.base.sha }}
-                echo "##[set-output name=storybook;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} '**/stories*' '**/src*')"
-                echo "##[set-output name=clayui;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} clayui.com '**/*.mdx' '**/docs*')"
+            - name: Fetch and Diff
+              id: diff
+              run: |
+                  git fetch --no-tags --depth=1 origin ${{ github.event.pull_request.base.sha }}
+                  echo "##[set-output name=storybook;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} '**/stories*' '**/src*')"
+                  echo "##[set-output name=clayui;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} clayui.com '**/*.mdx' '**/docs*')"
 
-          - name: Build Storybook
-            if: ${{ steps.diff.outputs.storybook }}
-            run: echo "run"
+            - name: Build Storybook
+              if: ${{ steps.diff.outputs.storybook }}
+              run: echo "run"
 
-          - name: Build clayui
-            if: ${{ steps.diff.outputs.clayui }}
-            run: echo "run"
+            - name: Build clayui
+              if: ${{ steps.diff.outputs.clayui }}
+              run: echo "run"
