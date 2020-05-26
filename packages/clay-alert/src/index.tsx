@@ -123,7 +123,7 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 		autoClose,
 		onClose
 	);
-
+	// test
 	const ConditionalContainer: React.FunctionComponent<{}> = ({children}) =>
 		variant === 'stripe' ? (
 			<div className="container">{children}</div>
