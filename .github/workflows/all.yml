@@ -89,32 +89,32 @@ jobs:
                   echo "##[set-output name=storybook;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} '**/stories*' '**/src*')"
                   echo "##[set-output name=clayui;]$(git diff --exit-code ${{ github.event.pull_request.base.sha }} clayui.com '**/*.mdx' '**/docs*')"
 
-            - name: Build Storybook
-              if: ${{ steps.diff.outputs.storybook }}
-              run: |
-                  yarn workspace @clayui/css run build && yarn storybook:build
-
-            - name: Build clayui
-              if: ${{ steps.diff.outputs.clayui }}
-              run: |
-                  cd clayui.com && yarn build
-
             - name: Check Branch
               id: branch
               run: |
                   echo "::set-output name=storybook::$(${{ github.event.pull_request.base.ref == 'stable' }} ? ${{ secrets.NETLIFY_STORYBOOK_ID }} : ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }})"
                   echo "::set-output name=clayui::$(${{ github.event.pull_request.base.ref == 'stable' }} ? ${{ secrets.NETLIFY_CLAYUI_ID }} : ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }})"
 
+            - name: Build Storybook
+              if: ${{ steps.diff.outputs.storybook }}
+              run: |
+                  yarn workspace @clayui/css run build && yarn storybook:build
+
             - name: Deploy Storybook Preview
               if: ${{ steps.diff.outputs.storybook }}
-              run: npx netlify-cli deploy --dir storybook-static --site ${{ env.NETLIFY_SITE_ID }} --auth ${{ env.NETLIFY_AUTH_TOKEN }} --prod ${{ github.event_name == 'push' }}
+              run: npx netlify-cli deploy --dir="storybook-static" --site="${{ env.NETLIFY_SITE_ID }}" --auth="${{ env.NETLIFY_AUTH_TOKEN }}" --prod=${{ github.event_name == 'push' }}
               env:
                   NETLIFY_SITE_ID: ${{ steps.branch.outputs.storybook }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
+            - name: Build clayui
+              if: ${{ steps.diff.outputs.clayui }}
+              run: |
+                  cd clayui.com && yarn build
+
             - name: Deploy clayui.com Preview
               if: ${{ steps.diff.outputs.clayui }}
-              run: npx netlify-cli deploy --dir clayui.com/public --site ${{ env.NETLIFY_SITE_ID }} --auth ${{ env.NETLIFY_AUTH_TOKEN }} --prod ${{ github.event_name == 'push' }}
+              run: npx netlify-cli deploy --dir="clayui.com/public" --site="${{ env.NETLIFY_SITE_ID }}" --auth="${{ env.NETLIFY_AUTH_TOKEN }}" --prod=${{ github.event_name == 'push' }}
               env:
                   NETLIFY_SITE_ID: ${{ steps.branch.outputs.storybook }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
