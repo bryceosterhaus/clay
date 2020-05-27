@@ -9,7 +9,7 @@ on:
         # branches: ['master', 'stable']
 
 jobs:
-    setup:
+    test:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -18,10 +18,6 @@ jobs:
               run: |
                   npm install -g yarn
                   yarn install
-            - uses: actions/upload-artifact@master
-              with:
-                  name: node_modules
-                  path: node_modules
 
             - name: Formatting
               run: |
@@ -29,21 +25,6 @@ jobs:
                   yarn format:check
             - name: Dependencies
               run: yarn checkDeps
-
-            # - name: Build
-            #   if: ${{ success() }}
-            #   run: yarn build
-
-    test:
-        runs-on: ubuntu-latest
-        needs: setup
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-            - uses: actions/download-artifact@master
-              with:
-                  name: node_modules
-                  path: node_modules
 
             - name: Jest
               env:
@@ -59,14 +40,9 @@ jobs:
 
     stats:
         runs-on: ubuntu-latest
-        needs: setup
+        needs: test
         steps:
-            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: actions/download-artifact@master
-              with:
-                  name: node_modules
-                  path: node_modules
 
             - name: Checkout BASE
               uses: actions/checkout@v2
@@ -74,7 +50,10 @@ jobs:
                   ref: ${{ github.event.pull_request.base.sha }}
 
             - name: Generate Build Info
-              run: yarn genBuildSize
+              run: |
+                  yarn install
+                  node ./node_modules/.bin/lerna run --ignore \"clayui.com\" build
+                  yarn genBuildSize
 
             - name: Clean directory
               if: ${{ success() }}
@@ -100,14 +79,14 @@ jobs:
 
     netlify:
         runs-on: ubuntu-latest
-        needs: [setup, test]
+        needs: test
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
-            - uses: actions/download-artifact@master
-              with:
-                  name: node_modules
-                  path: node_modules
+            - name: Install
+              run: |
+                  npm install -g yarn
+                  yarn install
 
             - name: Fetch and Diff
               id: diff
@@ -118,8 +97,10 @@ jobs:
 
             - name: Build Storybook
               if: ${{ steps.diff.outputs.storybook }}
-              run: echo "run"
+              run: |
+                  yarn workspace @clayui/css run build && yarn storybook:build
 
             - name: Build clayui
               if: ${{ steps.diff.outputs.clayui }}
-              run: echo "run"
+              run: |
+                  cd clayui.com && yarn build
