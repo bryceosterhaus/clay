@@ -111,8 +111,8 @@ jobs:
 
             - name: Echo?
               run: |
-                  echo "${{ steps.branch.storybook == 'storybook' }}"
-                  echo "${{ steps.branch.clayui == 'clayui' }}"
+                  echo "${{ github.ref }}: ${{ steps.branch.storybook == 'storybook' }}"
+                  echo "${{ github.ref }}: ${{ steps.branch.clayui == 'clayui' }}"
             # - name: Deploy Storybook Preview
             #   if: ${{ steps.diff.outputs.storybook }}
             #   uses: netlify/actions/cli@master
