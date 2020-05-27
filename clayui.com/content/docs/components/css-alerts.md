@@ -29,6 +29,7 @@ lexiconDefinition: 'https://liferay.design/lexicon/core-components/alerts/'
 </div>
 
 test
+test
 
 ## Colors
 
