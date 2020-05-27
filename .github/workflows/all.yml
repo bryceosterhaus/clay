@@ -106,13 +106,13 @@ jobs:
             - name: Check Branch
               id: branch
               run: |
-                  echo "::set-output name=storybook::$(${{ github.ref == 'stable' }} ? ${{ secrets.NETLIFY_STORYBOOK_ID }} : ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }})"
-                  echo "::set-output name=clayui::$(${{ github.ref == 'stable' }} ? ${{ secrets.NETLIFY_CLAYUI_ID }} : ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }})"
+                  echo "::set-output name=storybook::$(${{ github.event.pull_request.base.ref == 'stable' }} ? ${{ secrets.NETLIFY_STORYBOOK_ID }} : ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }})"
+                  echo "::set-output name=clayui::$(${{ github.event.pull_request.base.ref == 'stable' }} ? ${{ secrets.NETLIFY_CLAYUI_ID }} : ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }})"
 
             - name: Echo?
               run: |
-                  echo "${{ github.ref }}: ${{ steps.branch.storybook == 'storybook' }}"
-                  echo "${{ github.ref }}: ${{ steps.branch.clayui == 'clayui' }}"
+                  echo "${{ github.event.pull_request.base.ref }}: ${{ steps.branch.storybook == 'storybook' }}"
+                  echo "${{ github.event.pull_request.base.ref }}: ${{ steps.branch.clayui == 'clayui' }}"
             # - name: Deploy Storybook Preview
             #   if: ${{ steps.diff.outputs.storybook }}
             #   uses: netlify/actions/cli@master
