@@ -28,6 +28,8 @@ lexiconDefinition: 'https://liferay.design/lexicon/core-components/alerts/'
 	Don't forget to check <a href="https://www.w3.org/TR/wai-aria-practices/#alert">WAI-ARIA</a> accessibility pratices for alerts when writting your markup.
 </div>
 
+test
+
 ## Colors
 
 Lexicon adopts in its design system the following colors below:
