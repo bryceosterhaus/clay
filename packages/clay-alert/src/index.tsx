@@ -19,7 +19,7 @@ const useAutoClose = (autoClose?: boolean | number, onClose = () => {}) => {
 	let pauseTimer = () => {};
 	let startTimer = () => {};
 
-	if (autoClose) {
+	if (autoClose || false) {
 		pauseTimer = () => {
 			if (timer.current) {
 				timeToClose.current =
