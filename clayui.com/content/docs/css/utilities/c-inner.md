@@ -18,7 +18,7 @@ title: 'C Inner'
 </div>
 </div>
 
-A utility to help manage focus styles in an interactive component. Wrap the contents of your component in `<span class="c-inner" tabindex="-1">Text</span>` or `<div class="c-inner" tabindex="-1">Text</div>` to only show focus styles on keyboard interaction and not click.
+A utility to help manage focus styles in an interactive component. Wrap the contents of your component in `<span class="c-inner" tabindex="-1">Text</span>` or `<div class="c-inner" tabindex="-1">Text</div>` to only show focus styles on keyboard interaction and not click....
 
 <div class="clay-site-alert alert alert-warning">
     To disable style output from this utility set <code>$enable-c-inner: false;</code>.
