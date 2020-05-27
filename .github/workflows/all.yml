@@ -98,37 +98,34 @@ jobs:
               run: |
                   yarn workspace @clayui/css run build && yarn storybook:build
 
-            - name: Is Stable?
-              if: ${{ github.ref == 'stable' }}
-              run: |
-                  echo "::set-output name=storybook::${{ secrets.NETLIFY_STORYBOOK_ID }}"
-                  echo "::set-output name=clayui::${{ secrets.NETLIFY_CLAYUI_ID }}"
-
-            - name: Is Dev?
-              if: ${{ github.ref == 'master' }}
-              run: |
-                  echo "::set-output name=storybook::${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }}"
-                  echo "::set-output name=clayui::${{ secrets.NETLIFY_NEXT_CLAYUI_ID }}"
-
-            - name: Deploy Storybook Preview
-              if: ${{ steps.diff.outputs.storybook }}
-              uses: netlify/actions/cli@master
-              with:
-                  args: deploy --dir=storybook-static
-              env:
-                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }}
-                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
             - name: Build clayui
               if: ${{ steps.diff.outputs.clayui }}
               run: |
                   cd clayui.com && yarn build
 
-            - name: Deploy clayui.com Preview
-              if: ${{ steps.diff.outputs.storybook }}
-              uses: netlify/actions/cli@master
-              with:
-                  args: deploy --dir=clayui.com/public
-              env:
-                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }}
-                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            - name: Check Branch
+              id: branch
+              run: |
+                  echo "::set-output name=storybook::$(${{ github.ref == 'stable' }} ? ${{ secrets.NETLIFY_STORYBOOK_ID }})" : ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }})"
+                  echo "::set-output name=clayui::$(${{ github.ref == 'stable' }} ? ${{ secrets.NETLIFY_CLAYUI_ID }})" : ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }})"
+
+            - name: Echo?
+              run: |
+                  echo "${{ steps.branch.storybook }}"
+                  echo "${{ steps.branch.clayui }}"
+            # - name: Deploy Storybook Preview
+            #   if: ${{ steps.diff.outputs.storybook }}
+            #   uses: netlify/actions/cli@master
+            #   with:
+            #       args: deploy --dir=storybook-static
+            #   env:
+            #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_NEXT_STORYBOOK_ID }}
+            #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            # - name: Deploy clayui.com Preview
+            #   if: ${{ steps.diff.outputs.storybook }}
+            #   uses: netlify/actions/cli@master
+            #   with:
+            #       args: deploy --dir=clayui.com/public
+            #   env:
+            #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_NEXT_CLAYUI_ID }}
+            #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
