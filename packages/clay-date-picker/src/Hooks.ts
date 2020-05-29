@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-import moment from 'moment';
+import {DateTime} from 'luxon';
 import React from 'react';
 
 import * as Helpers from './Helpers';
@@ -29,27 +29,27 @@ const useWeeks = (currentMonth: Date, firstDayOfWeek: FirstDayOfWeek) => {
  */
 const useCurrentTime = (format: string) => {
 	const [currentTime, set] = React.useState<string>(() =>
-		moment().set('h', 0).set('m', 0).format(format)
+		DateTime.local().toFormat(format)
 	);
 
 	function setCurrentTime(
-		hours: number | string,
-		minutes: number | string
+		hour: number | string,
+		minute: number | string
 	): void {
-		if (typeof hours !== 'string') {
-			hours = moment().set('h', hours).format('H');
+		if (typeof hour !== 'string') {
+			hour = DateTime.local().set({hour}).hour;
 		}
 
-		if (typeof minutes !== 'string') {
-			minutes = moment().set('m', minutes).format('m');
+		if (typeof minute !== 'string') {
+			minute = DateTime.local().set({minute}).minute;
 		}
 
-		set(`${hours}:${minutes}`);
+		set(`${hour}:${minute}`);
 	}
 
 	return [currentTime, setCurrentTime] as [
 		string,
-		(hours: number | string, minutes: number | string) => void
+		(hour: number | string, minute: number | string) => void
 	];
 };
 

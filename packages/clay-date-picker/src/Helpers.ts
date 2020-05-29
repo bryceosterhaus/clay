@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+import {DateTime, Info} from 'luxon';
 import moment from 'moment';
 
 export interface IDay {
@@ -64,7 +65,7 @@ export function getWeekArray(d: Date, firstDayOfWeek = 0): Month {
 		dayArray.push({date: genDay});
 	}
 
-	dayArray.forEach((day) => {
+	dayArray.forEach(day => {
 		if (week.length > 0 && day.date.getDay() === firstDayOfWeek) {
 			weekArray.push(week);
 			week = [];
@@ -108,12 +109,12 @@ export function range({end, start}: {end: number; start: number}) {
  * This allows users to not have to import and use `moment` themselves.
  */
 export function getLocaleProps(locale: string) {
-	const localeData = moment.localeData(locale);
-
 	return {
-		dateFormat: localeData.longDateFormat('L'),
-		firstDayOfWeek: localeData.firstDayOfWeek(),
-		months: localeData.months(),
-		weekdaysShort: localeData.weekdaysShort(),
+		firstDayOfWeek: DateTime.local()
+			.setLocale(locale)
+			.startOf('week').weekday,
+		locale,
+		months: Info.months('long', {locale}),
+		weekdaysShort: Info.weekdays('short', {locale}),
 	};
 }

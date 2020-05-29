@@ -7,7 +7,7 @@ import Button from '@clayui/button';
 import DropDown from '@clayui/drop-down';
 import {ClayInput} from '@clayui/form';
 import Icon from '@clayui/icon';
-import moment from 'moment';
+import {DateTime} from 'luxon';
 import React from 'react';
 
 import DateNavigation from './DateNavigation';
@@ -124,6 +124,8 @@ interface IProps extends React.HTMLAttributes<HTMLInputElement> {
 	 */
 	value: string;
 
+	locale?: string;
+
 	/**
 	 * Short names of days of the week to use in the header
 	 * of the month. It should start from Sunday.
@@ -163,15 +165,16 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 				buttonNextMonth: 'Select the next month',
 				buttonPreviousMonth: 'Select the previous month',
 			},
-			dateFormat = 'YYYY-MM-DD',
+			dateFormat = 'yyyy-LL-dd',
 			disabled,
 			expanded,
-			firstDayOfWeek = 0,
+			firstDayOfWeek = FirstDayOfWeek.Sunday,
 			footerElement,
 			id,
 			initialExpanded = false,
 			initialMonth = new Date(),
 			inputName,
+			locale,
 			months = [
 				'January',
 				'February',
@@ -208,14 +211,15 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 		 * Normalize date for always set noon to avoid time zone issues
 		 */
 		const normalizeDate = (date: Date) =>
-			moment(date)
-				.clone()
-				.set('date', 1)
-				.set('hour', 12)
-				.set('minute', 0)
-				.set('second', 0)
-				.set('millisecond', 0)
-				.toDate();
+			DateTime.fromJSDate(date)
+				.set({
+					day: 1,
+					hour: 12,
+					millisecond: 1,
+					minute: 1,
+					second: 1,
+				})
+				.toJSDate();
 
 		/**
 		 * Indicates the current month rendered on the screen.
@@ -286,6 +290,7 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 		 */
 		const handleDayClicked = (date: Date) => {
 			setDaySelected(date);
+
 			onValueChange(date, 'click');
 		};
 
@@ -297,15 +302,15 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 		const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 			const {value} = event.target;
 			const format = time ? `${dateFormat} ${TIME_FORMAT}` : dateFormat;
-			const date = moment(value, format);
-			const year = date.year();
+			const date = DateTime.fromFormat(value, format);
+			const year = date.year;
 
-			if (date.isValid() && year >= years.start && years.end >= year) {
-				changeMonth(date.toDate());
-				setDaySelected(date.toDate());
+			if (date.isValid && year >= years.start && years.end >= year) {
+				changeMonth(date.toJSDate());
+				setDaySelected(date.toJSDate());
 
 				if (time) {
-					setCurrentTime(date.hours(), date.minutes());
+					setCurrentTime(date.hour, date.minute);
 				}
 			}
 
@@ -329,8 +334,14 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 
 			// Hack to force InputDate to add `currentTime` to the value of
 			// the input when the value was edited by the user.
-			if (typeof value === 'string' && moment(value, format).isValid()) {
-				onValueChange(moment(value, format).toDate(), 'time');
+			if (
+				typeof value === 'string' &&
+				DateTime.fromFormat(value, format).isValid
+			) {
+				onValueChange(
+					DateTime.fromFormat(value, format).toJSDate(),
+					'time'
+				);
 			}
 
 			setCurrentTime(hours, minutes);
@@ -352,6 +363,7 @@ const ClayDatePicker: React.FunctionComponent<IProps> = React.forwardRef<
 							dateFormat={dateFormat}
 							disabled={disabled}
 							inputName={inputName}
+							locale={locale}
 							onChange={inputChange}
 							placeholder={placeholder}
 							ref={ref}

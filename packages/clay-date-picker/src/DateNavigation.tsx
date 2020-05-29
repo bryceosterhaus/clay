@@ -5,7 +5,7 @@
 
 import Button from '@clayui/button';
 import Icon from '@clayui/icon';
-import moment from 'moment';
+import {DateTime} from 'luxon';
 import React from 'react';
 
 import * as Helpers from './Helpers';
@@ -40,7 +40,7 @@ const ClayDatePickerDateNavigation: React.FunctionComponent<IProps> = ({
 }) => {
 	const memoizedYears: Array<ISelectOption> = React.useMemo(
 		() =>
-			Helpers.range(years).map((elem) => {
+			Helpers.range(years).map(elem => {
 				return {
 					label: elem,
 					value: elem,
@@ -69,10 +69,12 @@ const ClayDatePickerDateNavigation: React.FunctionComponent<IProps> = ({
 	 * years in the range
 	 */
 	function handleChangeMonth(month: number) {
-		const date = moment(currentMonth).clone().add(month, 'M').toDate();
+		const date = DateTime.fromJSDate(currentMonth)
+			.plus({month})
+			.toJSDate();
 		const year = date.getFullYear();
 
-		if (memoizedYears.find((elem) => elem.value === year)) {
+		if (memoizedYears.find(elem => elem.value === year)) {
 			onMonthChange(date);
 		}
 	}

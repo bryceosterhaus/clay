@@ -25,7 +25,7 @@ const ClayDatePickerWithState = (props: {[key: string]: any}) => {
 };
 
 storiesOf('Components|ClayDatePicker', module)
-	.addDecorator((storyFn) => (
+	.addDecorator(storyFn => (
 		<div className="sheet">
 			<div className="form-group" style={{maxWidth: 520}}>
 				{storyFn()}
@@ -67,7 +67,7 @@ storiesOf('Components|ClayDatePicker', module)
 	))
 	.add('w/ locale', () => (
 		<ClayDatePickerWithState
-			dateFormat="DD.MM.YYYY"
+			dateFormat="dd.LL.yyyy"
 			firstDayOfWeek={FirstDayOfWeek.Monday}
 			months={[
 				'Январь',
@@ -83,7 +83,7 @@ storiesOf('Components|ClayDatePicker', module)
 				'Ноябрь',
 				'Декабрь',
 			]}
-			placeholder="DD.MM.YYYY HH:mm"
+			placeholder="YYYY-MM-DD HH:mm"
 			spritemap={spritemap}
 			time
 			timezone="GMT+03:00"
@@ -97,7 +97,7 @@ storiesOf('Components|ClayDatePicker', module)
 	.add('w/ getLocaleProps', () => (
 		<ClayDatePickerWithState
 			{...getLocaleProps('ru')}
-			placeholder="DD.MM.YYYY"
+			placeholder="dd.LL.yyyy"
 			spritemap={spritemap}
 			years={{
 				end: 2024,

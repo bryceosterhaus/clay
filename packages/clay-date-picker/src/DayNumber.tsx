@@ -4,7 +4,7 @@
  */
 
 import classnames from 'classnames';
-import moment from 'moment';
+import {DateTime} from 'luxon';
 import React from 'react';
 
 import {IDay} from './Helpers';
@@ -26,8 +26,8 @@ const ClayDatePickerDayNumber: React.FunctionComponent<IProps> = ({
 		'date-picker-date date-picker-calendar-item',
 		{
 			active:
-				moment(day.date).format('YYYY-MM-DD') ===
-				moment(daySelected).format('YYYY-MM-DD'),
+				DateTime.fromJSDate(day.date).toFormat('yyyy-LL-dd') ===
+				DateTime.fromJSDate(daySelected).toFormat('yyyy-LL-dd'),
 			disabled: day.outside || disabled,
 		}
 	);
@@ -36,13 +36,14 @@ const ClayDatePickerDayNumber: React.FunctionComponent<IProps> = ({
 
 	return (
 		<button
-			aria-label={moment(day.date)
-				.clone()
-				.set('hour', 12)
-				.set('minute', 0)
-				.set('second', 0)
-				.set('millisecond', 0)
-				.format('YYYY MM DD')}
+			aria-label={DateTime.fromJSDate(day.date)
+				.set({
+					hour: 12,
+					millisecond: 0,
+					minute: 0,
+					second: 0,
+				})
+				.toFormat('yyyy-LL-dd')}
 			className={classNames}
 			disabled={day.outside}
 			onClick={handleClick}

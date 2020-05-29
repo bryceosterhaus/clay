@@ -4,7 +4,7 @@
  */
 
 import {ClayInput} from '@clayui/form';
-import moment from 'moment';
+import {DateTime} from 'luxon';
 import React from 'react';
 
 interface IProps extends React.HTMLAttributes<HTMLInputElement> {
@@ -13,6 +13,7 @@ interface IProps extends React.HTMLAttributes<HTMLInputElement> {
 	dateFormat: string;
 	disabled?: boolean;
 	inputName?: string;
+	locale?: string;
 	placeholder?: string;
 	time: boolean;
 	timeFormat: string;
@@ -27,6 +28,7 @@ const ClayDatePickerInputDate = React.forwardRef<HTMLInputElement, IProps>(
 			currentTime,
 			dateFormat,
 			inputName = 'datePicker',
+			locale,
 			time = false,
 			timeFormat,
 			useNative = false,
@@ -38,8 +40,14 @@ const ClayDatePickerInputDate = React.forwardRef<HTMLInputElement, IProps>(
 		const isValidValue = (value: string | Date): string => {
 			const format = time ? `${dateFormat} ${timeFormat}` : dateFormat;
 
-			if (moment(value, format).isValid() && value instanceof Date) {
-				const date = moment(value).clone().format(dateFormat);
+			if (
+				value instanceof Date &&
+				DateTime.fromISO(value.toISOString()).isValid
+			) {
+				const date = DateTime.fromJSDate(value)
+					.setLocale(locale)
+					// .toFormat(format)
+					.toLocaleString();
 
 				return time ? `${date} ${currentTime}` : date;
 			}
