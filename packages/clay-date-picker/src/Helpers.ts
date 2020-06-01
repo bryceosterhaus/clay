@@ -4,7 +4,6 @@
  */
 
 import {DateTime, Info} from 'luxon';
-import moment from 'moment';
 
 export interface IDay {
 	date: Date;
@@ -65,7 +64,7 @@ export function getWeekArray(d: Date, firstDayOfWeek = 0): Month {
 		dayArray.push({date: genDay});
 	}
 
-	dayArray.forEach(day => {
+	dayArray.forEach((day) => {
 		if (week.length > 0 && day.date.getDay() === firstDayOfWeek) {
 			weekArray.push(week);
 			week = [];
@@ -110,9 +109,8 @@ export function range({end, start}: {end: number; start: number}) {
  */
 export function getLocaleProps(locale: string) {
 	return {
-		firstDayOfWeek: DateTime.local()
-			.setLocale(locale)
-			.startOf('week').weekday,
+		firstDayOfWeek: DateTime.local().setLocale(locale).startOf('week')
+			.weekday,
 		locale,
 		months: Info.months('long', {locale}),
 		weekdaysShort: Info.weekdays('short', {locale}),
