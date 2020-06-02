@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-import moment from 'moment';
 import React from 'react';
 
 import * as Helpers from './Helpers';
@@ -29,19 +28,24 @@ const useWeeks = (currentMonth: Date, firstDayOfWeek: FirstDayOfWeek) => {
  */
 const useCurrentTime = (format: string) => {
 	const [currentTime, set] = React.useState<string>(() =>
-		moment().set('h', 0).set('m', 0).format(format)
+		Helpers.formatDate(
+			Helpers.setDate(new Date(), {hours: 0, minutes: 0}),
+			format
+		)
 	);
 
 	function setCurrentTime(
 		hours: number | string,
 		minutes: number | string
 	): void {
+		const date = Helpers.setDate(new Date(), {hours, minutes});
+
 		if (typeof hours !== 'string') {
-			hours = moment().set('h', hours).format('H');
+			hours = Helpers.formatDate(date, 'H');
 		}
 
 		if (typeof minutes !== 'string') {
-			minutes = moment().set('m', minutes).format('m');
+			minutes = Helpers.formatDate(date, 'm');
 		}
 
 		set(`${hours}:${minutes}`);
