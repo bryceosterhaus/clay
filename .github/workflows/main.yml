@@ -38,8 +38,8 @@ jobs:
             - uses: actions/setup-node@v1
             - name: Install Dependencies
               run: yarn && yarn workspace @clayui/css run build
-            - name: npx build-storybook
-              run: yarn storybook:build
+            - name: Build Storybook
+              run: npx build-storybook
             - name: Run Loki
               run: npx loki --requireReference --reactUri file:./storybook-static
     # stats:
