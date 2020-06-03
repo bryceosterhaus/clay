@@ -41,7 +41,7 @@ jobs:
             - name: Lint
               run: yarn storybook:build
             - name: Run Loki
-              run: build-storybook && loki --requireReference --reactUri file:./storybook-static
+              run: loki --requireReference --reactUri file:./storybook-static
     # stats:
     #     runs-on: ubuntu-latest
     #     steps:
