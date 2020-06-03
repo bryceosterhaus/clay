@@ -136,11 +136,6 @@ const ClayAlert: React.FunctionComponent<IClayAlertProps> & {
 	return (
 		<div
 			{...otherProps}
-			className={classNames(className, 'alert', {
-				'alert-dismissible': showDismissible,
-				'alert-fluid': variant === 'stripe',
-				[`alert-${displayType}`]: displayType,
-			})}
 			onMouseOut={startAutoCloseTimer}
 			onMouseOver={pauseAutoCloseTimer}
 			role="alert"
