@@ -1,0 +1,1642 @@
+<!-- 
+title: Form Elements (Color Picker)
+section: Components
+-->
+<style>
+	#colorPickerView2 {
+		display: none;
+	}
+</style>
+
+<div class="alert alert-warning">This requires custom javascript.</div>
+
+<div class="clay-site-row-spacer row">
+	<div class="col-md-12">
+		<h3>Clay Color</h3>
+
+		<blockquote class="blockquote">
+			<p>A color picker.</p>
+		</blockquote>
+
+		<div class="sheet">
+			<div class="form-group">
+				<label for="clayColor1DropdownToggle">Background Color</label>
+				<div class="clay-color input-group">
+					<div
+						class="input-group-item input-group-item-shrink input-group-prepend"
+					>
+						<div class="input-group-text">
+							<button
+								aria-expanded="false"
+								aria-haspopup="true"
+								aria-label="Select a color"
+								class="btn clay-color-btn dropdown-toggle"
+								data-toggle="dropdown"
+								id="clayColor1DropdownToggle"
+								title="#B2EDFF"
+								type="button"
+								style="background-color: #b2edff;"
+							></button>
+
+							<div
+								aria-labelledby="clayColor1DropdownToggle"
+								class="clay-color-dropdown-menu dropdown-menu"
+							>
+								<div id="colorPickerView1">
+									<div class="clay-color-swatch">
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#000000"
+												style="
+													background-color: #000000;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#5F5F5F"
+												style="
+													background-color: #5f5f5f;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#9A9A9A"
+												style="
+													background-color: #9a9a9a;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#CBCBCB"
+												style="
+													background-color: #cbcbcb;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#E1E1E1"
+												style="
+													background-color: #e1e1e1;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FF0D0D"
+												style="
+													background-color: #ff0d0d;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FF8A1C"
+												style="
+													background-color: #ff8a1c;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#2BA676"
+												style="
+													background-color: #2ba676;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#006EF8"
+												style="
+													background-color: #006ef8;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#7F26FF"
+												style="
+													background-color: #7f26ff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FF21A0"
+												style="
+													background-color: #ff21a0;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FF5F5F"
+												style="
+													background-color: #ff5f5f;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFB46E"
+												style="
+													background-color: #ffb46e;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#50D2A0"
+												style="
+													background-color: #50d2a0;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#4B9BFF"
+												style="
+													background-color: #4b9bff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#AF78FF"
+												style="
+													background-color: #af78ff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FF73C3"
+												style="
+													background-color: #ff73c3;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFB1B1"
+												style="
+													background-color: #ffb1b1;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFDEC0"
+												style="
+													background-color: #ffdec0;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#91E3C3"
+												style="
+													background-color: #91e3c3;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#9DC8FF"
+												style="
+													background-color: #9dc8ff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#DFCAFF"
+												style="
+													background-color: #dfcaff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFC5E6"
+												style="
+													background-color: #ffc5e6;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFD9D9"
+												style="
+													background-color: #ffd9d9;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFF3E8"
+												style="
+													background-color: #fff3e8;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#B1EBD5"
+												style="
+													background-color: #b1ebd5;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#C5DFFF"
+												style="
+													background-color: #c5dfff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#F8F2FF"
+												style="
+													background-color: #f8f2ff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#FFEDF7"
+												style="
+													background-color: #ffedf7;
+												"
+											></button>
+										</div>
+									</div>
+
+									<div class="clay-color-header">
+										<span class="component-title"
+											>Custom Colors</span
+										>
+										<button
+											class="component-action"
+											id="claySiteShowView2"
+											type="button"
+										>
+											<svg
+												class="lexicon-icon lexicon-icon-drop"
+												focusable="false"
+												role="presentation"
+											>
+												<use
+													xlink:href="{{rootPath}}/images/icons/icons.svg#drop"
+												/>
+											</svg>
+										</button>
+									</div>
+
+									<div class="clay-color-swatch">
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn focus"
+												title="#B2EDFF"
+												style="
+													background-color: #b2edff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#45EDC5"
+												style="
+													background-color: #45edc5;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#BEDA70"
+												style="
+													background-color: #beda70;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#DB5959"
+												style="
+													background-color: #db5959;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#36466D"
+												style="
+													background-color: #36466d;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#55ADFF"
+												style="
+													background-color: #55adff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+									</div>
+								</div>
+
+								<div id="colorPickerView2">
+									<div class="clay-color-header">
+										<span class="component-title"
+											>Custom Colors</span
+										>
+										<button
+											class="close"
+											id="claySiteShowView1"
+											type="button"
+										>
+											<svg
+												class="lexicon-icon lexicon-icon-times"
+												focusable="false"
+												role="presentation"
+											>
+												<use
+													xlink:href="{{rootPath}}/images/icons/icons.svg#times"
+												/>
+											</svg>
+										</button>
+									</div>
+
+									<div class="clay-color-swatch">
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn focus"
+												title="#B2EDFF"
+												style="
+													background-color: #b2edff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#45EDC5"
+												style="
+													background-color: #45edc5;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#BEDA70"
+												style="
+													background-color: #beda70;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#DB5959"
+												style="
+													background-color: #db5959;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#36466D"
+												style="
+													background-color: #36466d;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn"
+												title="#55ADFF"
+												style="
+													background-color: #55adff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+										<div class="clay-color-swatch-item">
+											<button
+												class="btn clay-color-btn clay-color-btn-bordered"
+												title="#FFFFFF"
+												style="
+													background-color: #ffffff;
+												"
+											></button>
+										</div>
+									</div>
+
+									<div class="clay-color-map-group">
+										<div
+											class="clay-color-map-hsb clay-color-map"
+											style="
+												background-color: rgb(
+													180,
+													237,
+													254
+												);
+											"
+										>
+											<button
+												class="clay-color-pointer clay-color-map-pointer"
+												style="
+													top: 0px;
+													left: 130px;
+													background-color: rgb(
+														180,
+														237,
+														254
+													);
+												"
+												type="button"
+											></button>
+										</div>
+
+										<div class="clay-color-map-values">
+											<div class="form-group">
+												<div class="input-group">
+													<div
+														class="input-group-item"
+													>
+														<input
+															class="form-control input-group-inset input-group-inset-before"
+															id="clayColor1Red"
+															type="text"
+															value="180"
+														/>
+														<label
+															class="input-group-inset-item input-group-inset-item-before"
+															for="clayColor1Red"
+														>
+															R
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="input-group">
+													<div
+														class="input-group-item"
+													>
+														<input
+															class="form-control input-group-inset input-group-inset-before"
+															id="clayColor1Green"
+															type="text"
+															value="237"
+														/>
+														<label
+															class="input-group-inset-item input-group-inset-item-before"
+															for="clayColor1Green"
+														>
+															G
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="input-group">
+													<div
+														class="input-group-item"
+													>
+														<input
+															class="form-control input-group-inset input-group-inset-before"
+															id="clayColor1Blue"
+															type="text"
+															value="254"
+														/>
+														<label
+															class="input-group-inset-item input-group-inset-item-before"
+															for="clayColor1Blue"
+														>
+															B
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div
+										class="clay-color-range clay-color-range-hue"
+									>
+										<button
+											class="clay-color-pointer clay-color-range-pointer"
+											type="button"
+											style="
+												left: 98px;
+												background-color: rgb(
+													180,
+													237,
+													254
+												);
+											"
+										></button>
+									</div>
+
+									<div class="clay-color-footer">
+										<input
+											class="form-control"
+											type="text"
+											value="#B2EDFF"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group-append input-group-item">
+						<input
+							aria-label="Color selection is #B2EDFF"
+							class="form-control"
+							id="clayColor1"
+							type="text"
+							value="#B2EDFF"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="clayColor3DropdownMenuToggle"
+					>Background Color</label
+				>
+				<div class="clay-color input-group">
+					<div
+						class="input-group-item input-group-item-shrink input-group-prepend"
+					>
+						<div class="input-group-text">
+							<button
+								aria-expanded="false"
+								aria-haspopup="true"
+								aria-label="Select a color"
+								class="btn clay-color-btn dropdown-toggle"
+								data-toggle="dropdown"
+								id="clayColor3DropdownMenuToggle"
+								title="#B2EDFF"
+								type="button"
+								style="background-color: #b2edff;"
+							></button>
+							<div
+								aria-labelledby="clayColor3DropdownMenuToggle"
+								class="clay-color-dropdown-menu dropdown-menu"
+							></div>
+						</div>
+					</div>
+					<div class="input-group-append input-group-item">
+						<input
+							aria-label="Color selection is B2EDFF"
+							class="form-control input-group-inset input-group-inset-before"
+							id="clayColor3"
+							type="text"
+							value="B2EDFF"
+						/>
+						<label
+							class="input-group-inset-item input-group-inset-item-before"
+							for="clayColor3"
+						>
+							#
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="clayColor2">Background Color</label>
+				<div class="clay-color input-group">
+					<div class="input-group-item">
+						<div class="input-group-text">
+							<button
+								aria-expanded="false"
+								aria-haspopup="true"
+								aria-label="Select a color"
+								class="btn clay-color-btn dropdown-toggle"
+								data-toggle="dropdown"
+								id="clayColor2"
+								title="#006EF8"
+								type="button"
+								style="background-color: #006ef8;"
+							></button>
+
+							<div
+								aria-labelledby="clayColor2"
+								class="clay-color-dropdown-menu dropdown-menu"
+							>
+								<div class="clay-color-swatch">
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#000000"
+											style="background-color: #000000;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#5F5F5F"
+											style="background-color: #5f5f5f;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#9A9A9A"
+											style="background-color: #9a9a9a;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#CBCBCB"
+											style="background-color: #cbcbcb;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#E1E1E1"
+											style="background-color: #e1e1e1;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn clay-color-btn-bordered"
+											title="#FFFFFF"
+											style="background-color: #ffffff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FF0D0D"
+											style="background-color: #ff0d0d;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FF8A1C"
+											style="background-color: #ff8a1c;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#2BA676"
+											style="background-color: #2ba676;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn focus"
+											title="#006EF8"
+											style="background-color: #006ef8;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#7F26FF"
+											style="background-color: #7f26ff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FF21A0"
+											style="background-color: #ff21a0;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FF5F5F"
+											style="background-color: #ff5f5f;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFB46E"
+											style="background-color: #ffb46e;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#50D2A0"
+											style="background-color: #50d2a0;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#4B9BFF"
+											style="background-color: #4b9bff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#AF78FF"
+											style="background-color: #af78ff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FF73C3"
+											style="background-color: #ff73c3;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFB1B1"
+											style="background-color: #ffb1b1;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFDEC0"
+											style="background-color: #ffdec0;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#91E3C3"
+											style="background-color: #91e3c3;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#9DC8FF"
+											style="background-color: #9dc8ff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#DFCAFF"
+											style="background-color: #dfcaff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFC5E6"
+											style="background-color: #ffc5e6;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFD9D9"
+											style="background-color: #ffd9d9;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFF3E8"
+											style="background-color: #fff3e8;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#B1EBD5"
+											style="background-color: #b1ebd5;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#C5DFFF"
+											style="background-color: #c5dfff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#F8F2FF"
+											style="background-color: #f8f2ff;"
+										></button>
+									</div>
+									<div class="clay-color-swatch-item">
+										<button
+											class="btn clay-color-btn"
+											title="#FFEDF7"
+											style="background-color: #ffedf7;"
+										></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="clay-site-dropdown-display clay-site-row-spacer row">
+	<div class="col-md-12">
+		<h3>Clay Color Dropdown Menu</h3>
+
+		<div class="clay-site-dropdown-menu-container">
+			<div class="clay-color-dropdown-menu dropdown-menu show">
+				<div class="clay-color-swatch">
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFB1B1"
+							style="background-color: #ffb1b1;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#50D2A0"
+							style="background-color: #50d2a0;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF5F5F"
+							style="background-color: #ff5f5f;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#55ADFF"
+							style="background-color: #55adff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#AF78FF"
+							style="background-color: #af78ff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF73C3"
+							style="background-color: #ff73c3;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#4B9BFF"
+							style="background-color: #4b9bff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF73C3"
+							style="background-color: #ff73c3;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#91E3C3"
+							style="background-color: #91e3c3;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clay-site-dropdown-menu-container">
+			<div class="clay-color-dropdown-menu dropdown-menu show">
+				<div class="clay-color-swatch">
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#000000"
+							style="background-color: #000000;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#5F5F5F"
+							style="background-color: #5f5f5f;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#9A9A9A"
+							style="background-color: #9a9a9a;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#CBCBCB"
+							style="background-color: #cbcbcb;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#E1E1E1"
+							style="background-color: #e1e1e1;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF0D0D"
+							style="background-color: #ff0d0d;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF8A1C"
+							style="background-color: #ff8a1c;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#2BA676"
+							style="background-color: #2ba676;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#006EF8"
+							style="background-color: #006ef8;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#7F26FF"
+							style="background-color: #7f26ff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF21A0"
+							style="background-color: #ff21a0;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF5F5F"
+							style="background-color: #ff5f5f;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFB46E"
+							style="background-color: #ffb46e;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#50D2A0"
+							style="background-color: #50d2a0;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#4B9BFF"
+							style="background-color: #4b9bff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#AF78FF"
+							style="background-color: #af78ff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FF73C3"
+							style="background-color: #ff73c3;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFB1B1"
+							style="background-color: #ffb1b1;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFDEC0"
+							style="background-color: #ffdec0;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#91E3C3"
+							style="background-color: #91e3c3;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#9DC8FF"
+							style="background-color: #9dc8ff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#DFCAFF"
+							style="background-color: #dfcaff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFC5E6"
+							style="background-color: #ffc5e6;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFD9D9"
+							style="background-color: #ffd9d9;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFF3E8"
+							style="background-color: #fff3e8;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#B1EBD5"
+							style="background-color: #b1ebd5;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#C5DFFF"
+							style="background-color: #c5dfff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#F8F2FF"
+							style="background-color: #f8f2ff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#FFEDF7"
+							style="background-color: #ffedf7;"
+						></button>
+					</div>
+				</div>
+
+				<div class="clay-color-header">
+					<span class="component-title">Custom Colors</span>
+					<button class="component-action" type="button">
+						<svg
+							class="lexicon-icon lexicon-icon-drop"
+							focusable="false"
+							role="presentation"
+						>
+							<use
+								xlink:href="{{rootPath}}/images/icons/icons.svg#drop"
+							/>
+						</svg>
+					</button>
+				</div>
+
+				<div class="clay-color-swatch">
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn focus"
+							title="#B2EDFF"
+							style="background-color: #b2edff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#45EDC5"
+							style="background-color: #45edc5;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#BEDA70"
+							style="background-color: #beda70;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#DB5959"
+							style="background-color: #db5959;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#36466D"
+							style="background-color: #36466d;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#55ADFF"
+							style="background-color: #55adff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clay-site-dropdown-menu-container">
+			<div class="clay-color-dropdown-menu dropdown-menu show">
+				<div class="clay-color-header">
+					<span class="component-title">Custom Colors</span>
+					<button class="close" type="button">
+						<svg
+							class="lexicon-icon lexicon-icon-times"
+							focusable="false"
+							role="presentation"
+						>
+							<use
+								xlink:href="{{rootPath}}/images/icons/icons.svg#times"
+							/>
+						</svg>
+					</button>
+				</div>
+
+				<div class="clay-color-swatch">
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn focus"
+							title="#B2EDFF"
+							style="background-color: #b2edff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#45EDC5"
+							style="background-color: #45edc5;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#BEDA70"
+							style="background-color: #beda70;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#DB5959"
+							style="background-color: #db5959;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#36466D"
+							style="background-color: #36466d;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn"
+							title="#55ADFF"
+							style="background-color: #55adff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+					<div class="clay-color-swatch-item">
+						<button
+							class="btn clay-color-btn clay-color-btn-bordered"
+							title="#FFFFFF"
+							style="background-color: #ffffff;"
+						></button>
+					</div>
+				</div>
+
+				<div class="clay-color-map-group">
+					<div
+						class="clay-color-map-hsb clay-color-map"
+						style="background-color: rgb(180, 237, 254);"
+					>
+						<button
+							class="clay-color-pointer clay-color-map-pointer"
+							style="
+								top: 0px;
+								left: 130px;
+								background-color: rgb(180, 237, 254);
+							"
+							type="button"
+						></button>
+					</div>
+
+					<div class="clay-color-map-values">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-item">
+									<input
+										class="form-control input-group-inset input-group-inset-before"
+										id="clayColor3Red"
+										type="text"
+										value="180"
+									/>
+									<label
+										class="input-group-inset-item input-group-inset-item-before"
+										for="clayColor3Red"
+									>
+										R
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-item">
+									<input
+										class="form-control input-group-inset input-group-inset-before"
+										id="clayColor3Green"
+										type="text"
+										value="237"
+									/>
+									<label
+										class="input-group-inset-item input-group-inset-item-before"
+										for="clayColor3Green"
+									>
+										G
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-item">
+									<input
+										class="form-control input-group-inset input-group-inset-before"
+										id="clayColor3Blue"
+										type="text"
+										value="254"
+									/>
+									<label
+										class="input-group-inset-item input-group-inset-item-before"
+										for="clayColor3Blue"
+									>
+										B
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clay-color-range clay-color-range-hue">
+					<button
+						class="clay-color-pointer clay-color-range-pointer"
+						type="button"
+						style="
+							left: 98px;
+							background-color: rgb(180, 237, 254);
+						"
+					></button>
+				</div>
+				<div class="clay-color-footer">
+					<div class="form-group">
+						<input
+							class="form-control"
+							type="text"
+							value="#B2EDFF"
+						/>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-item">
+								<input
+									class="form-control input-group-inset input-group-inset-before"
+									id="hexInput"
+									type="text"
+									value="B2EDFF"
+								/>
+								<label
+									class="input-group-inset-item input-group-inset-item-before"
+									for="hexInput"
+								>
+									#
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.input-group-inset').on('focusin', function (event) {
+		$(this).closest('.input-group-item').addClass('focus');
+	});
+
+	$('.input-group-inset').on('focusout', function (event) {
+		$(this).closest('.input-group-item').removeClass('focus');
+	});
+
+	$('#claySiteShowView2').on('click', function (event) {
+		$('#colorPickerView1').css('display', 'none');
+		$('#colorPickerView2').css('display', 'block');
+	});
+
+	$('#claySiteShowView1').on('click', function (event) {
+		$('#colorPickerView1').css('display', 'block');
+		$('#colorPickerView2').css('display', 'none');
+	});
+
+	$('.clay-color-dropdown-menu').on('click', function (event) {
+		event.stopPropagation();
+	});
+</script>
