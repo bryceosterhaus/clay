@@ -21,7 +21,6 @@
 		"strictNullChecks": true,
 		"target": "es2015",
 		"paths": {
-			"@clayui/*": ["node_modules/@clayui/*/src"],
 			"*": ["custom-types/*", "node_modules/*", "packages/*"]
 		}
 	},
