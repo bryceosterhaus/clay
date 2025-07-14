@@ -22,6 +22,7 @@ const withMDX = createMDXPlugin({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	basePath: '/clay',
 	output: 'export',
 	images: {
 		unoptimized: true,
