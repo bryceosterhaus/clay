@@ -5,10 +5,11 @@ on:
 
 env:
   CLAY_REPO_BRANCH: master
-  PORTAL_REPO_URL: https://github.com/liferay/liferay-portal.git
-  PORTAL_REPO_BRANCH: master
-  SOURCE_DIR: modules/apps/frontend-js/frontend-js-clay-web/clay
   DEST_DIR: synced-source
+  PORTAL_REPO_BRANCH: master
+  PORTAL_REPO_URL: https://github.com/liferay/liferay-portal.git
+  SOURCE_DIR: modules/apps/frontend-js/frontend-js-clay-web/clay
+  TAG_PREFIX: 7.4
 
 jobs:
   sync:
@@ -47,3 +48,47 @@ jobs:
           git add ${{ env.DEST_DIR }}
           git commit -m "Nightly sync from liferay-portal"
           git push origin ${{ env.CLAY_REPO_BRANCH }}
+
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Clay repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ env.CLAY_REPO_BRANCH }}
+
+      - name: Get latest 7.4 tag via GitHub CLI
+        run: |
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+          LATEST_TAG=$(gh release list --repo ${{ env.PORTAL_REPO }} --limit 100 \
+            | awk '{print $1}' | grep "^${{ env.TAG_PREFIX }}" | sort -V | tail -n1)
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          echo "Latest tag: $LATEST_TAG"
+
+      - name: Update version in lerna.json
+        run: |
+          echo "Updating lerna.json version to $LATEST_TAG"
+          jq --arg tag "$LATEST_TAG" '.version = $tag' lerna.json > tmp.json && mv tmp.json lerna.json
+
+      - name: Commit and push changes
+        id: check_changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          if git diff --quiet lerna.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+          git add lerna.json
+          git commit -m "Update lerna.json version to $LATEST_TAG"
+          git push origin ${{ env.CLAY_REPO_BRANCH }}
+
+      - name: Trigger release workflow
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          gh workflow run release.yml \
+            --ref ${{ env.CLAY_REPO_BRANCH }} \
+            --repo ${{ github.repository }}
