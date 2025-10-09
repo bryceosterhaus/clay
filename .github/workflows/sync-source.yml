@@ -1,0 +1,49 @@
+name: Nightly Sync from liferay-portal
+
+on:
+  workflow_dispatch:  # manual trigger for testing
+
+env:
+  CLAY_REPO_BRANCH: master
+  PORTAL_REPO_URL: https://github.com/liferay/liferay-portal.git
+  PORTAL_REPO_BRANCH: master
+  SOURCE_DIR: modules/apps/frontend-js/frontend-js-clay-web/clay
+  DEST_DIR: synced-source
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Clay repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: test-clay-sync  # make sure this branch exists
+
+      - name: Sparse checkout liferay-portal
+        run: |
+          git clone --filter=blob:none --no-checkout --branch ${{ env.PORTAL_REPO_BRANCH }} --single-branch ${{ env.PORTAL_REPO_URL }} portal
+          cd portal
+          git sparse-checkout init --cone
+          git sparse-checkout set ${{ env.SOURCE_DIR }}
+          git checkout ${{ env.PORTAL_REPO_BRANCH }}
+
+      - name: Copy files from portal
+        run: |
+          rsync -av --delete portal/${{ env.SOURCE_DIR }}/ ${{ env.DEST_DIR }}
+
+      - name: Check if there are changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git add ${{ env.DEST_DIR }}
+          git commit -m "Nightly sync from liferay-portal"
+          git push origin ${{ env.CLAY_REPO_BRANCH }}
