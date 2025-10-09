@@ -86,9 +86,9 @@ jobs:
           git commit -m "Update lerna.json version to $LATEST_TAG"
           git push origin ${{ env.CLAY_REPO_BRANCH }}
 
-      - name: Trigger release workflow
-        if: steps.check_changes.outputs.changed == 'true'
-        run: |
-          gh workflow run release.yml \
-            --ref ${{ env.CLAY_REPO_BRANCH }} \
-            --repo ${{ github.repository }}
+      # - name: Trigger release workflow
+      #   if: steps.check_changes.outputs.changed == 'true'
+      #   run: |
+      #     gh workflow run release.yml \
+      #       --ref ${{ env.CLAY_REPO_BRANCH }} \
+      #       --repo ${{ github.repository }}
